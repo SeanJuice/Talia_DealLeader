@@ -1,0 +1,261 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Request for Agent Registration</h1>                    
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+<hr>
+    <p class="text-center">When completing the registration process you will need to download the two agreements below (Non-Disclosure Agreement and Due Dilligence Agreement) after downloading and signing agrements please upload them. 
+        On completion of Registration process you will not gain access to the platform immediately. Your information will be viewed by a Deal Leader Executive.
+    Once confirmed you will recieve an email stating wether or not your registration has been accepted.</p>
+    <hr>
+    <div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-sm btn-secondary text-white btn-block" href="./assets/DD.pdf" download><i class="fa fa-download"></i> Download Non-Disclosure Agreement Here</a>
+    </div>
+    <div class="col-md-6">
+        <a class="btn btn-sm btn-secondary text-white btn-block" href="./assets/NDA.pdf" download><i class="fa fa-download"></i> Download Due-Diligence Here</a>
+    </div>
+</div>
+    <hr>
+    <form #form="ngForm" autocomplete="off" *ngIf="userService.formData" (submit)="onSubmit(form, $event)" class="center">
+        <div class="form-group">
+        <div class="form-row">
+            <div class="form-group col-md-6" [class.has-error]="AGENT_TYPE_ID.touched && AGENT_TYPE_ID.invalid">
+                <label>Registration Personal Type</label><label style="color: red;">  *</label>
+                <select name="AGENT_TYPE_ID" #AGENT_TYPE_ID="ngModel" [(ngModel)]="userService.formData.AGENT_TYPE_ID" class="form-control selectwidth" required>
+                    <option value="null">- Select Agent Type -</option>
+                    <option *ngFor="let item of agenttypeList" value="{{item.AGENT_TYPE_ID}}">{{item.AGENT_TYPE_NAME}}</option>
+                </select>
+                <div class="help-block" *ngIf="AGENT_TYPE_ID.touched && AGENT_TYPE_ID.invalid" style="color: red; font-size: 80%;">Agent Type is Required!</div>
+            </div>
+            <div class="form-group  col-md-6" [class.has-error]="COUNTRY_ID.touched && COUNTRY_ID.invalid">
+                <label>Country</label><label style="color: red;">  *</label>
+                <select name="COUNTRY_ID" #COUNTRY_ID="ngModel" [(ngModel)]="userService.formData.COUNTRY_ID" class="form-control selectwidth" required>
+                    <option value="null">- Select Country -</option>
+                    <option *ngFor="let country of countryList | filter:SearchCountry " value="{{country.COUNTRY_ID}}">{{country.COUNTRY_NAME}}</option>
+                </select>
+                <div class="help-block" *ngIf="COUNTRY_ID.touched && COUNTRY_ID.invalid" style="color: red; font-size: 80%;">Country is Required!</div>
+            </div>  
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6" [class.has-error]="TITLE_ID.touched && TITLE_ID.invalid">
+                <label>Title</label><label style="color: red;">  *</label>
+                <select name="TITLE_ID" #TITLE_ID="ngModel" [(ngModel)]="userService.formData.TITLE_ID" class="form-control selectwidth" required>
+                    <option value="null">- Select Title -</option>
+                    <option *ngFor="let title of titleList" value="{{title.TITLE_ID}}">{{title.TITLE_NAME}}</option>
+                </select>
+                <div class="help-block" *ngIf="TITLE_ID.touched && TITLE_ID.invalid" style="color: red; font-size: 80%;">Title is Required!</div>
+            </div>
+            <div class="form-group  col-md-6">
+                <label>ID No.</label><label style="color: red;">  *</label>
+                <input 
+                placeholder="ID No."
+                name="AGENT_ID_NO" 
+                #AGENT_ID_NO="ngModel" 
+                [(ngModel)]="userService.formData.AGENT_ID_NO" 
+                class="form-control" 
+                required 
+                minlength="13" 
+                maxlength="13">
+                <div 
+                class="validation-error" 
+                *ngIf="AGENT_ID_NO.invalid && AGENT_ID_NO.touched">
+                    <div *ngIf="AGENT_ID_NO.errors.required">This field is required.</div>
+                    <div *ngIf="AGENT_ID_NO.errors.minlength">ID number should be a minimum of 13 characters!</div>
+                </div>
+            </div>  
+        </div>  
+            </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Passport No.</label><label style="color: red;">  *</label>
+                <input 
+                placeholder="Passport No."
+                name="AGENT_PASSPORT_NO" 
+                #AGENT_PASSPORT_NO="ngModel" 
+                [(ngModel)]="userService.formData.AGENT_PASSPORT_NO" 
+                class="form-control" 
+                required 
+                minlength="9" 
+                maxlength="9"
+                pattern="[A-Z]{1}[0-9]{8}">
+                <div class="validation-error" *ngIf="AGENT_PASSPORT_NO.invalid && AGENT_PASSPORT_NO.touched">
+                    <div *ngIf="AGENT_PASSPORT_NO.errors.required">Passport No. is Required!</div>
+                    <div *ngIf="AGENT_PASSPORT_NO.errors.minlength">Passport number should be a minimum of 9 characters!</div>
+                    <div *ngIf="AGENT_PASSPORT_NO.errors.pattern">Passport number should be valid!</div>
+                </div>
+            </div>
+            <div class="form-group  col-md-6">
+                <label>First Name</label><label style="color: red;">  *</label>
+                <input 
+                placeholder="First Name"
+                name="AGENT_NAME" 
+                #AGENT_NAME="ngModel" 
+                [(ngModel)]="userService.formData.AGENT_NAME" 
+                class="form-control" 
+                required 
+                pattern="[a-zA-Z][a-zA-Z ]+"
+                maxlength="50">
+                <div class="validation-error" *ngIf="AGENT_NAME.invalid && AGENT_NAME.touched">
+                    <div *ngIf="AGENT_NAME.errors.required">First Name is Required!</div>
+                    <div *ngIf="AGENT_NAME.errors.pattern">First Name can contain no numbers!</div>
+                    <div *ngIf="AGENT_NAME.errors.pattern">ID number should only contain numbers!</div>
+                </div>
+            </div>  
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Surname</label><label style="color: red;">  *</label>
+                <input 
+                placeholder="Surname"
+                name="AGENT_SURNAME" 
+                #AGENT_SURNAME="ngModel" 
+                [(ngModel)]="userService.formData.AGENT_SURNAME" 
+                class="form-control"  
+                required
+                pattern="[a-zA-Z][a-zA-Z ]+"
+                maxlength="50">
+                <div class="validation-error" *ngIf="AGENT_SURNAME.invalid && AGENT_SURNAME.touched">
+                    <div *ngIf="AGENT_SURNAME.errors.required">This field is required.</div>
+                    <div *ngIf="AGENT_SURNAME.errors.pattern">Surname can contain no numbers!</div>
+                </div>
+            </div>
+            <div class="form-group  col-md-6">
+                <label>Company Registration</label><label style="color: red;">  *</label>
+                <input 
+                placeholder="Company Registration"
+                name="AGENT_COMPANY_REGISTRATION" 
+                #AGENT_COMPANY_REGISTRATION="ngModel" 
+                [(ngModel)]="userService.formData.AGENT_COMPANY_REGISTRATION" 
+                class="form-control" 
+                required
+                minlength="12"
+                maxlength="12"
+                pattern="[0-9]*">
+                <div class="validation-error" *ngIf="AGENT_COMPANY_REGISTRATION.invalid && AGENT_COMPANY_REGISTRATION.touched">
+                    <div *ngIf="AGENT_COMPANY_REGISTRATION.errors.required">This field is required.</div>
+                    <div *ngIf="AGENT_COMPANY_REGISTRATION.errors.pattern">Company registration can only contain numbers.</div>
+                    <div *ngIf="AGENT_COMPANY_REGISTRATION.errors.minlength">Company registration should be a minimum of 9 characters!</div>
+                </div>
+            </div>   
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Company Name</label><label style="color: red;">  *</label>
+                <input
+                placeholder="Company Name" 
+                name="AGENT_COMPANY_NAME" 
+                #AGENT_COMPANY_NAME="ngModel" 
+                [(ngModel)]="userService.formData.AGENT_COMPANY_NAME" 
+                class="form-control" 
+                required
+                maxlength="50">
+                <div class="validation-error" *ngIf="AGENT_COMPANY_NAME.invalid && AGENT_COMPANY_NAME.touched">This field is required.</div>
+            </div>
+            <div class="form-group  col-md-6">
+                <label>Contact No.</label><label style="color: red;">  *</label>
+                <input
+                placeholder="Contact No."
+                name="AGENT_CONTACT_NO" 
+                #AGENT_CONTACT_NO="ngModel" 
+                [(ngModel)]="userService.formData.AGENT_CONTACT_NO" 
+                class="form-control" 
+                required
+                minlength="10"
+                maxlength="14"
+                pattern="[0-9]*">
+                <div class="validation-error" *ngIf="AGENT_CONTACT_NO.invalid && AGENT_CONTACT_NO.touched">
+                    <div *ngIf="AGENT_CONTACT_NO.errors.required">This field is required.</div>
+                    <div *ngIf="AGENT_CONTACT_NO.errors.minlength">Contact number must be atleast 10 characters.</div>
+                    <div *ngIf="AGENT_CONTACT_NO.errors.pattern">Contact number can only contain numbers.</div>
+                </div>
+            </div>   
+        </div>
+            <div class="form-group">
+                <label>Email Address</label><label style="color: red;">  *</label>
+                <input 
+                placeholder="Email-Address" 
+                name="AGENT_EMAIL_ADDRESS" 
+                #AGENT_EMAIL_ADDRESS="ngModel" 
+                [(ngModel)]="userService.formData.AGENT_EMAIL_ADDRESS" 
+                class="form-control" 
+                required 
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                <div class="validation-error" *ngIf="AGENT_EMAIL_ADDRESS.invalid && AGENT_EMAIL_ADDRESS.touched">
+                    <div *ngIf="AGENT_EMAIL_ADDRESS.errors.required">This field is required.</div>
+                    <div *ngIf="AGENT_EMAIL_ADDRESS.errors.pattern">Email address entered is invalid.</div>
+                </div>
+            </div>
+
+            <!--UserPart-->
+            <!-- <form (ngSubmit)="SaveDetails($event)"> -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Username</label><label style="color: red;">  *</label>
+                    <input
+                    placeholder="Userame" 
+                    name="USERNAME" 
+                    #USERNAME="ngModel" 
+                    [(ngModel)]="userService.formData.USERNAME" 
+                    class="form-control" 
+                    required
+                    maxlength="20">
+                    <div class="validation-error" *ngIf="USERNAME.invalid && USERNAME.touched">This field is required.</div>
+                </div>
+                <div class="form-group  col-md-6">
+                    <label>Password</label><label style="color: red;">  *</label>
+                    <input
+                    placeholder="Password"
+                    name="PASSWORD" 
+                    #PASSWORD="ngModel" 
+                    [(ngModel)]="userService.formData.PASSWORD" 
+                    class="form-control" 
+                    required
+                    minlength="6"
+                    maxlength="20">
+                    <div class="validation-error" *ngIf="PASSWORD.invalid && PASSWORD.touched">
+                        <div *ngIf="PASSWORD.errors.required">This field is required.</div>
+                        <div *ngIf="PASSWORD.errors.minlength">Password must be atleast 6 characters.</div>
+                    </div>
+                </div>   
+            </div>
+            <!-- </form>> -->
+            <input type="hidden" name="USER_ROLE_ID" #USER_ROLE_ID="ngModel" [(ngModel)]="userService.formData.USER_ROLE_ID">
+            <input type="hidden" name="USER_ID" #USER_ID="ngModel" [(ngModel)]="userService.formData.USER_ID">
+
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Upload Signed Non-Disclosure Agreement Here</label><label style="color: red;">  *</label>
+                    <input type="file"  name="nda" #nda #nda="ngModel" [(ngModel)]="userService.formData.nda" (click)="upload()"> 
+                </div>
+                <div class="form-group  col-md-6">
+                    <label>Upload Signed Due Dilligence Here</label><label style="color: red;">  *</label>
+                    <br>
+                    <input type="file" name="postedFile" #postedFile #postedFile="ngModel" [(ngModel)]="userService.formData.postedFile" (change)="file($event)" 
+                    class="form-control" accept=".docx, application/pdf, image/jpeg" (click)= "upload()"> 
+                </div>  
+            </div>
+            <input type="hidden" name="AGENT_STATUS_ID" #AGENT_STATUS_ID="ngModel" [(ngModel)]="userService.formData.AGENT_STATUS_ID">
+            <button type="submit"  class="btn btn-sm btn-secondary text-white btn-block" [disabled]="!form.valid">Submit</button>
+        </form>
+</div>
+
+<!-- (change)="upload($event)" -->
+
+<!-- (change)="handleFile($event.target)" -->
+
+<!-- #postedFile="ngModel" [(ngModel)]="userService.formData.postedFile" -->
+        
+<!-- #nda="ngModel" [(ngModel)]="userService.formData.nda" -->
+        
+        
+        
+            
+        
+                
+
+
+
+    
+
+        

@@ -1,0 +1,33 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center">Employees</h1>
+  <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+  <hr>
+  <br>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder= "Search" aria-label="Search Agent" aria-label="SearchAgent"  [(ngModel)]="SearchEmployee" autocomplete="off">
+  </div>
+    <a routerLink="/employee">
+      <button class="btn btn-xs btn-outline-success" ><i class="far fa-plus-square"></i> Add Employee</button> 
+      </a>
+      <br>
+      <br>
+    <table class="table table-hover" id="myTable">
+    <tr class="trhead">
+            <th>Name</th>
+            <th>Surname</th>
+            <th>ID No</th>
+            <th>Passport No</th>
+            <th>Physical Address</th>
+            <th>Contact No</th>
+        </tr>
+        <!--<tr *ngFor="let at of service.list">--> 
+          <tr *ngFor="let at of EmployeeDetails | async | filter:SearchEmployee">
+            <td (click)="populateForm(at)">{{at.EMPLOYEE_NAME}}</td>
+            <td (click)="populateForm(at)">{{at.EMPLOYEE_SURNAME}}</td>
+            <td (click)="populateForm(at)">{{at.EMPLOYEE_ID_NO}}</td>
+            <td (click)="populateForm(at)">{{at.EMPLOYEE_PASSPORT_NO}}</td>
+            <td (click)="populateForm(at)">{{at.EMPLOYEE_PHYSICAL_ADDRESS}}</td>
+            <td (click)="populateForm(at)">{{at.EMPLOYEE_CONTACT_NO}}</td>
+        </tr>
+    </table>
+    </div>

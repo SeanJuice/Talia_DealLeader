@@ -1,0 +1,33 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center">Agent Types</h1>
+  <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+  <hr>
+  <br>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder= "Search" aria-label="Search Agent" aria-label="SearchAgent"  [(ngModel)]="SearchAgentType" autocomplete="off">
+      </div>
+    <br>
+    <a routerLink="/agenttype">
+      <button class="btn btn-xs btn-outline-success" ><i class="far fa-plus-square"></i> Add Agent Type</button> 
+      </a>
+      <br>
+      <br>
+    <table class="table table-hover" id="myTable">
+    <tr class="trhead">
+            <th>Agent Type Name</th>
+            <th></th>
+        </tr>
+    
+        <tr *ngFor="let at of data | filter:SearchAgentType"> 
+            <td>{{at.AGENT_TYPE_NAME}}</td> 
+            <td>    
+            <a routerLink="/agenttypes/{{at.AGENT_TYPE_ID}}">
+              <button class="btn btn-xs btn-outline-info " (click)="populateForm(at)">Update</button> 
+            </a>
+              <button class="btn btn-xs btn-outline-danger ml-1" (click)="onDelete(at.AGENT_TYPE_ID)" >Delete</button> 
+          </td>
+            
+        </tr>
+    </table>
+    </div>
+    

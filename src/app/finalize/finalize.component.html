@@ -1,0 +1,63 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Finalize Lead</h1>
+    <!-- <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a> -->
+    <hr> 
+    <a href="http://localhost:8080/CaptureQuote.html">Additional Help</a><br>
+    <br>
+    <div class="row">
+    <div class="form-group col-md-6" *ngFor="let at of leadDetails | async">
+        <input type="hidden" value="{{at.PRODUCT_ID}}" id="">
+        <input type="hidden" value="{{at.LEAD_ID}}" id="">
+            <div class="row">
+                <p>Product:  </p> 
+                <a class="ml-3">{{at.PRRODUCT_NAME}}</a>
+            </div>
+            <div class="row">
+                <p>Year of Make:  </p> 
+                <a class="ml-3">{{at.YEA_OF_MAKE}}</a>
+            </div>
+            <div class="row">
+                <p>Condition:  </p> 
+                <a class="ml-3">{{at.CONDITION_NAME}}</a>
+            </div>
+            <div class="row">
+                <p>Quantity:  </p> 
+                <a class="ml-3">{{at.QUANTITY}}</a>
+            </div>
+    </div>
+    <div class="form-group">
+        <div style="font-size: 30px;">
+            <i class="fas fa-money-check fa-4x"></i>
+        </div>
+    </div>
+</div>
+<hr>
+<!-- <p class="text-center">
+    Select supplier whose quote you are recording. Only once you have selected a supplier will the send quote button become available.
+</p> -->
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label>Contract PDF</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group col-md-6">
+                    <input type="file" #PICTURE >
+                </div>
+        </div>
+            <br>
+            <div class="row">
+                <div class="form-group col-md-6" *ngFor="let at of leadDetails | async">
+                    <a ></a>
+                    <button type="submit" class="btn btn-sm btn-info text-white" (click)="finalizeLead(at.LEAD_ID, PICTURE.value)" ><i class="fas fa-paper-plane"></i> Finalize Lead</button>
+            </div>
+    </div>
+    <div class="form-group" *ngFor="let at of leadDetails | async">
+        <a class="btn btn-sm btn-secondary text-white" (click)="ReturnToLeadDetails(at.LEAD_ID)"><i class="fa fa-hand-point-left"></i> Return to lead details</a> 
+    </div>
+        </div>
+
+
+
+
+

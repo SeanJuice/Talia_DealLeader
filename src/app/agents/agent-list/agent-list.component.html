@@ -1,0 +1,43 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center">Agent List</h1>
+  <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+  <hr>
+  
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder= "Search" aria-label="Search Agent" aria-label="SearchAgent"  [(ngModel)]="SearchAgentList" autocomplete="off">
+    <div class="input-group-append">
+    </div>
+  </div>
+    <br>
+    
+    <table class="table table-hover" id="myTable">
+    <tr class="trhead">
+            <th>Agent Name</th>
+            <th>Agent Surname</th>
+            <th>Company Name</th>
+            <th>Company Registration</th>
+            <th></th>
+        </tr>
+
+          <tr *ngFor="let at of dataArray | async | filter:SearchAgentList">
+            <td >{{at.AGENT_NAME}}</td>
+            <td >{{at.AGENT_SURNAME}}</td>
+            <td >{{at.AGENT_COMPANY_NAME}}</td>
+            <td >{{at.AGENT_COMPANY_REGISTRATION}}</td>
+            <!-- <td (click)="populateForm(at)">{{at.AGENT_STATUS_NAME}}</td> -->
+            
+            <td><div class="btn-group">
+              <!-- <button type="button" class="btn btn-xs" 
+                (click)="populateForm(at)"
+                    data-toggle="modal" data-target="#myModal"> -->
+                    <!-- <i class="fa fa-pencil-square-o" style="font-size:18px; color:blue"></i></button> -->
+                <!-- <button class="btn btn-xs " (click)="populateForm(at)" data-toggle="modal" data-target="#myModal">Update</button>  -->
+                <!-- <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a> -->
+              <!-- <button (click)="openOrEdit(at.AGENT_ID)" class="btn btn-xs btn-outline-primary">View Details</button>   -->
+              <a class="btn btn-sm btn-info text-white" (click)="openOrEdit(at.AGENT_ID)"><i class="fa fa-info-circle"></i> View Details</a>
+              </div>
+          </td>
+        </tr>
+    </table>
+    </div>
+  

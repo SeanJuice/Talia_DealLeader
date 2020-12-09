@@ -1,0 +1,35 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<br>
+
+<div style="border-color: #396e6a">
+            
+    <h1 style="text-align: center; border-style: solid;
+    border-width: 2px; border-color: #396e6a; border-radius: 50px; padding: 10px 10%; ">Available Meeting Slots for: {{Date | date}}</h1>
+    <br>
+</div>
+
+<table class="table table-hover" id="myTable">
+<tr class="trhead">     
+        <th style="text-align: center;">Slot</th>
+        <th style="text-align: center;">Start Time</th>
+        <th style="text-align: center;">End Time</th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let slot of allSlots">      
+        <td style="text-align: center;">{{slot.MEETING_SLOT_ID}}</td>
+        <td style="text-align: center;">{{slot.START_TIME}}</td>
+        <td style="text-align: center;">{{slot.END_TIME}}</td>
+        <td style="text-align: center;" *ngIf="slot.Status == 1">
+            <button  (click)="slots(slot.MEETING_SLOT_ID, slot.START_TIME, slot.END_TIME)">Book</button> 
+        </td>
+        <td style="text-align: center;" *ngIf="slot.Status == 2">
+            <button (click)="reschedule(slot.MEETING_ID)">Reschedule</button> 
+            <button (click)="delete(slot.MEETING_ID)">Cancel</button> 
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,48 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Add Product Category</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+    <hr>
+    <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    
+        <!-- <input type="hidden" name="COUNTRY_ID" #COUNTRY_ID="ngModel" [(ngModel)]="service.formData.COUNTRY_ID"> -->
+    
+        <div class="form-group">
+            <label>Product Category Name</label>
+            <input placeholder="Enter Product Category Name" name="PRODUCT_CATEGORY_NAME" 
+                #PRODUCT_CATEGORY_NAME="ngModel" 
+                [(ngModel)]="service.formData.PRODUCT_CATEGORY_NAME" 
+                class="form-control" 
+                required
+                pattern="[a-zA-Z\s]+"
+                maxlength="50"
+                minlength="2">
+                <div class="validation-error" *ngIf="PRODUCT_CATEGORY_NAME.invalid && PRODUCT_CATEGORY_NAME.touched">
+                    <div  *ngIf="PRODUCT_CATEGORY_NAME.errors.required">
+                        This field is required.</div>
+                    <div  *ngIf="PRODUCT_CATEGORY_NAME.errors.pattern ">
+                        Product Category Name can contain no numbers!</div>
+                    <div *ngIf="PRODUCT_CATEGORY_NAME.errors.minlength ">
+                        Product Category Name should be atleast 2 characters.</div>
+                    <div *ngIf="PRODUCT_CATEGORY_NAME.errors.maxlength ">
+                        Product Category Name cannot be more than 50 characters.</div>
+                </div>  
+        </div>
+        <div class="form-group">
+            <label>Product Category Description</label>
+            <input  placeholder="Enter Product Category Description"  name="PRODUCT_CATEGORY_DESCRIPTION" 
+            #PRODUCT_CATEGORY_DESCRIPTION="ngModel" [(ngModel)]="service.formData.PRODUCT_CATEGORY_DESCRIPTION" 
+            class="form-control" required>
+            <div class="validation-error" *ngIf="PRODUCT_CATEGORY_DESCRIPTION.invalid && PRODUCT_CATEGORY_DESCRIPTION.touched">
+                This field is required.</div>
+        </div>
+        <div class="form-group">
+            <div class="w3-show-inline-block" >
+                <button type="submit" [disabled]="form.invalid" class="btn btn-xs btn-info">Save</button>
+                <a routerLink="/productcategorylist">
+                <button  class="btn btn-xs ml-1 btn-danger" >Return</button></a>
+            </div>
+        </div>
+    </form>
+    </div>
+    
+    

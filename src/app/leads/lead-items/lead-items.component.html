@@ -1,0 +1,86 @@
+<h4 class="display-4 text-center">Add Product</h4>
+<p class="text-center">Please start by selecting a product category.</p>
+<hr>
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+    <input type="hidden" name="LEADPRODUCT_ID" #LEADPRODUCT_ID="ngModel" [(ngModel)]="formData.LEADPRODUCT_ID">
+    <input type="hidden" name="CONDITION_NAME" #CONDITION_NAME="ngModel" [(ngModel)]="formData.CONDITION_NAME">
+    <input type="hidden" name="PRODUCT_NAME" #PRODUCT_NAME="ngModel" [(ngModel)]="formData.PRODUCT_NAME">
+    <input type="hidden" name="YEAR_OF_MAKE" #YEAR_OF_MAKE="ngModel" [(ngModel)]="formData.YEAR_OF_MAKE">
+    <input type="hidden" name="LEAD_ID" #LEAD_ID="ngModel" [(ngModel)]="formData.LEAD_ID">
+        <div class="form-group">
+            <label>Product Category</label><label style="color: red;">  *</label>
+            <select  
+            class="form-control selectwidth" 
+            name="PRODUCT_CATEGORY_ID" 
+            #PRODUCT_CATEGORY_ID="ngModel" 
+            [(ngModel)]="formData.PRODUCT_CATEGORY_ID" 
+            (change)="prodCatChange($event.target)"
+            required>
+                <option value="null">- Select Product Category -</option>
+                <option *ngFor="let item of productCategoryList" value="{{item.PRODUCT_CATEGORY_ID}}"
+                >{{item.PRODUCT_CATEGORY_NAME}}</option>
+            </select>
+            <div class="help-block" *ngIf="PRODUCT_CATEGORY_ID.touched && PRODUCT_CATEGORY_ID.invalid" style="color: red; font-size: 80%;">You need to select a product category first to see product types.</div>
+        </div>
+        <div class="form-group">
+            <label>Product Type</label><label style="color: red;">  *</label>
+            <select 
+            [disabled]="formData.PRODUCT_CATEGORY_ID==null" 
+            class="form-control selectwidth" 
+            name="PRODUCT_TYPE_ID" 
+            #PRODUCT_TYPE_ID="ngModel" 
+            [(ngModel)]="formData.PRODUCT_TYPE_ID"
+            (change)="prodTypeChange($event.target)" 
+            required>
+                <option value="null">- Select Product Type -</option>
+            <option *ngFor="let item of productTypeList" value="{{item.PRODUCT_TYPE_NAME}}">{{item.PRODUCT_TYPE_NAME}}</option>
+            </select>
+            <div class="help-block" *ngIf="PRODUCT_TYPE_ID.touched && PRODUCT_TYPE_ID.invalid" style="color: red; font-size: 80%;">You need to select a product type first to see products.</div>
+        </div>
+        <div class="form-group">
+            <label>Product</label><label style="color: red;">  *</label>
+            <select 
+            [disabled]="formData.PRODUCT_TYPE_ID==null" 
+            class="form-control selectwidth" 
+            name="PRODUCT_ID" 
+            #PRODUCT_ID="ngModel" 
+            [(ngModel)]="formData.PRODUCT_ID" 
+            required>
+                <option value="null">- Select Product -</option>
+                <option *ngFor="let item of productList" value="{{item.PRODUCT_ID}}">{{item.PRODUCT_NAME}}</option>
+            </select>
+            <div class="help-block" *ngIf="PRODUCT_ID.touched && PRODUCT_ID.invalid" style="color: red; font-size: 80%;">Product is Required!</div>
+        </div>
+        <div class="form-group">
+            <label>Condition</label><label style="color: red;">  *</label>
+            <select 
+            [disabled]="formData.PRODUCT_ID==null" 
+            class="form-control selectwidth" 
+            name="CONDITION_ID" 
+            #CONDITION_ID="ngModel" 
+            [(ngModel)]="formData.CONDITION_ID" 
+            required>
+                <option value="null">- Select Condition -</option>
+                <option *ngFor="let item of conditionList" value="{{item.CONDITION_ID}}">{{item.CONDITION_NAME}}</option>
+            </select>
+            <div class="help-block" *ngIf="CONDITION_ID.touched && CONDITION_ID.invalid" style="color: red; font-size: 80%;">Condition is Required!</div>
+        </div>
+        <div class="form-group">
+            <label>Quantity</label><label style="color: red;">  *</label>
+            <input
+            placeholder="Quantity"
+            type="number"
+            name="QUANTITY" 
+            #QUANTITY="ngModel" 
+            [(ngModel)]="formData.QUANTITY" 
+            class="form-control" 
+            required>
+            <div class="validation-error" *ngIf="QUANTITY.invalid && QUANTITY.touched">
+                <div *ngIf="QUANTITY.errors.required">This field is required.</div>
+            </div>
+        </div> 
+        <div class="form-group">
+            <button type="submit" class=" btn-sm btn-info text-white " [disabled]="!form.valid"><i class="fa fa-check-circle"></i> Add Product</button>
+            <button class=" btn-sm btn-danger text-white ml-1" [mat-dialog-close]><i class="fa fa-window-close"></i> Close</button>
+        </div> 
+</form>

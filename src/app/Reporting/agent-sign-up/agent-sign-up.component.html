@@ -1,0 +1,54 @@
+<hr>
+<div class="jumbotron">
+<h1 class="display-4 text-center">Agent Report</h1>
+<a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+<hr>
+<div class="alert alert-secondary" role="alert" >
+  This report will contain information about agents who signed up on the system.
+</div>
+
+<br>
+<br>
+  
+
+
+  <button  class=" btn-sm btn-secondary text-white " (click)="GenerateReport()">Generate Report</button>
+  <button  class="btn-sm btn-info text-white ml-1" (click)="DownloadPDF()">Download as PDF</button>
+  
+<div id="ChartDiv" id="contentToConvert" >
+  <canvas id="canvas"></canvas>
+  <h1 class="display-4 text-center">Agent SignUp Report</h1> 
+
+
+<div *ngFor="let item of TableData; let i = index">
+<table id="testing{{i}}" style="width: 100%;">
+<thead class="thead-light" >
+<tr>
+  <th style="width: 10% ">Name</th>
+  <th>Surname</th>
+  <th>ID Number</th>
+  <th>Company Name</th>
+  <th>Company Registration</th>
+
+  
+</tr>
+</thead>
+<tbody >
+<tr *ngFor="let agent of item.Agents">
+  <td style="width: 10% ">{{agent.name}}</td>
+  <td>{{agent.surname}}</td>
+  <td>{{agent.ID}}</td>
+  <td>{{agent.companyname}}</td>
+  <td>{{agent.companyreg}}</td>
+  
+</tr>
+</tbody>
+<br>
+<div *ngIf="TableData" id="controlBreak">
+<div>Total Agents : {{totalCount}}</div>
+</div>
+<br>
+</table>
+<br>
+<br>
+</div>

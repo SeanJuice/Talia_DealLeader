@@ -1,0 +1,51 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Add Product Type</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+    <hr>
+<form #form="ngForm"  (submit)="onSubmit(form)" autocomplete="off">
+    <div class="form-group">
+        <label>Product Category Name</label>
+        <select class="selectpicker dropdown mt-4 ml-3" 
+        name="PRODUCT_CATEGORY_ID" 
+        #PRODUCT_CATEGORY_ID="ngModel"
+         [(ngModel)]="service.formData.PRODUCT_CATEGORY_ID" 
+         class="form-control"
+         placeholder="Product Type Name"
+         required>
+            <option value="null">-Select-</option>
+            <option *ngFor="let productcategory of productcategoryList" 
+            value="{{productcategory.PRODUCT_CATEGORY_ID}}" class="text-center">{{productcategory.PRODUCT_CATEGORY_NAME}}</option>   
+        </select>
+        <div class="help-block" *ngIf="PRODUCT_CATEGORY_ID.touched && PRODUCT_CATEGORY_ID.invalid" style="color: red; font-size: 80%;">Product Category is Required!</div>
+    </div>
+
+
+    <div class="form-group">
+        <label>Product Type Name</label>
+        <input placeholder="Enter Product Type Name" 
+        name="PRODUCT_TYPE_NAME" 
+        #PRODUCT_TYPE_NAME="ngModel" 
+        [(ngModel)]="service.formData.PRODUCT_TYPE_NAME" 
+        class="form-control" 
+        required
+        placeholder="Product Type Description">
+        <div class="validation-error" *ngIf="PRODUCT_TYPE_NAME.invalid && PRODUCT_TYPE_NAME.touched">This field is required.</div>
+    </div>
+    <div class="form-group">
+        <label>Product Type Description</label>
+        <input  placeholder="Enter Product Type Description"  name="PRODUCT_TYPE_DESCRIPTION" 
+        #PRODUCT_TYPE_DESCRIPTION="ngModel" [(ngModel)]="service.formData.PRODUCT_TYPE_DESCRIPTION" class="form-control" required>
+        <div class="validation-error" *ngIf="PRODUCT_TYPE_DESCRIPTION.invalid && PRODUCT_TYPE_DESCRIPTION.touched">This field is required.</div>
+    </div>
+
+    <div class="w3-show-inline-block" >
+        <div class="w3-show-inline-block" >
+            <button type="submit" [disabled]="form.invalid" class="btn btn-xs btn-info">Save</button>
+            <a routerLink="/producttypelist">
+            <button  class="btn btn-xs ml-1 btn-danger"  >Return</button></a>
+        </div>
+    </div>
+
+ 
+</form>
+</div>

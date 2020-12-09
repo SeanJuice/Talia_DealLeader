@@ -1,0 +1,18 @@
+<div class="jumbotron">
+<br>
+
+<table class="table table-hover" id="myTable">
+<tr class="trhead">     
+        <th style="text-align: center;">Audit Trail ID</th>
+        <th style="text-align: center;">Audit Date</th>
+        <th style="text-align: center;">Action</th>
+        <th style="text-align: center;">User</th>
+    </tr>
+    <tr *ngFor="let at of auditTrail | async">      
+        <td style="text-align: center;">{{at.AUDIT_TRAIL_ID}}</td>
+        <td style="text-align: center;">{{at.AUDIT_TRAIL_DATETIME | date:'medium'}}</td>
+        <td style="text-align: center;">{{at.ACTION}}</td>
+        <td style="text-align: center;">{{at.USER}}</td>
+    </tr>
+</table>
+</div>

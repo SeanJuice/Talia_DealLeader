@@ -1,0 +1,126 @@
+
+<div class="jumbotron">
+  <h1 class="display-4 text-center">Products Sold Report</h1>
+  <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+  <hr>
+<div class="alert alert-secondary" role="alert">
+  This report will contain information about products finalized during the selected time period.
+</div>
+
+<br>
+<br>
+  <div >
+    <label for="OptionSelect">Please select start date and end date:</label>
+    <br>
+    <div class="form-inline">
+      <label for="startdate">Start Date:</label>
+      <div class="input-group">
+        <input type="date"
+        name="startdate"
+       
+        [(ngModel)]="startdate"
+             placeholder="yyyy-mm-dd"
+             class="form-control"
+             id="startdate"
+             required>
+
+             
+             
+      </div>
+    
+      <label for="enddate" class="ml-3">End Date:</label>
+      <div class="input-group ">
+       
+            <input type="date"
+            name="enddate"
+           
+            [(ngModel)]="enddate"
+                 placeholder="yyyy-mm-dd"
+                 class="form-control"
+                 id="enddate"
+                 required >
+      </div>
+    </div>
+  <br>
+  <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
+    All fields are required
+    
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage1">
+    The start date cannot be greater than the end date
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage2">
+    The end date cannot be after today
+  </div>
+
+
+  
+  
+  
+  <button  class=" btn-sm btn-secondary text-white " (click)="GenerateReport()">Generate Report</button>
+  <button  class="btn-sm btn-info text-white ml-1" (click)="DownloadPDF()">Download as PDF</button>
+  </div>
+  <br>
+  <br>
+ <!--<div class="tab">
+    <tabset>
+     
+      
+      <tab *ngFor="let tabz of tabs"
+         [heading]="tabz.title"
+         [active]="tabz.active"
+         (selectTab)="tabz.active = true"
+         (deselect)="tabz.active = false"
+         [disabled]="tabz.disabled"
+         [removable]="tabz.removable"
+         (removed)="removeTabHandler(tabz)"
+         [customClass]="tabz.customClass">-->
+
+       <div id="ChartDiv" id="contentToConvert">
+         <canvas id="canvas"></canvas>
+         <table class="table" id="jsPdfTable">           
+          <div *ngFor="let item of TableData;let i = index" >
+            <div class="row">
+              <caption><strong>{{item.PRODUCT_NAME}}</strong>(Sum: {{item.Sum}})</caption>
+            </div>
+            
+            
+            <table id="testing{{i}}" style="width: 100%;" >
+              <thead >
+                <tr>
+                  <th>Agent Name</th>
+                  <th>Agent Surname</th>
+                  <th>Product Type</th>
+                  <th>Product Category</th>
+                  <th>Quantity of Products</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of item.Products">
+                  <td>{{product.agentname}}</td>
+                  <td>{{product.agentsurname}}</td>
+                  <td>{{product.type}}</td>
+                  <td>{{product.category}}</td>
+                  <td>{{product.quantity}}</td>
+
+                  
+                  </tr>
+                
+            </tbody>
+            </table>
+  
+            <br>
+          </div>
+          <br>
+          <div class="loginpic">
+            <img style="width: 300px; height: 250px;" class="display-inline-block" [src]="imageUrl">
+            </div>
+        
+         </table>
+       </div>         
+       <br>
+
+
+         
+     
+<br>

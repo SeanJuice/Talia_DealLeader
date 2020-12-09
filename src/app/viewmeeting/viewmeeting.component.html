@@ -1,0 +1,61 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Meeting Details</h1>
+    <!-- <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a> -->
+    <br>
+    <hr>
+    <div class="row">
+        <th></th>
+        <tr *ngIf="(agentMeetingDetails | async)?.length==0" class="display-4 text-center">
+            <td class="font-italic text-center" colspan=" 1">
+                No quote meeting for your lead yet. Please check back later :)
+            </td>
+        </tr>   
+    </div>
+    <form action="">
+        <div class="row">
+            <div class="form-group col-md-6" *ngFor="let at of agentMeetingDetails | async">
+                    <div class="row">
+                        <p>Meeting Location :  </p> 
+                        <a class="ml-3">{{at.MEETING_LOCATION}}</a>
+                    </div>
+                    <div class="row">
+                        <p>Meeting Date : </p> 
+                        <a class="ml-3">{{at.MEETING_DATE}}</a>
+                    </div>
+                <div class="row">
+                    <p>Meeting Start Time :  </p> 
+                    <a class="ml-3">{{at.START_TIME}}</a>
+                </div>
+                <div class="row">
+                    <p>Meeting End Time :  </p> 
+                    <a class="ml-3">{{at.END_TIME}}</a>
+                </div>
+                <div class="row">
+                    <p>Lead Status :  </p> 
+                    <a class="ml-3">{{at.LEAD_STATUS_NAME}}</a>
+                </div>
+            </div>
+        </div>
+            <div class="row">
+            <div class="form-group col-md-6"  *ngFor="let at of agentMeetingDetails | async">
+                <br>
+                <br>
+                <br>
+                <button class="btn btn-sm btn-success text-white"
+                [disabled]="at.LEAD_STATUS_NAME === 'Meeting Accepted'" 
+                (click)="accept(at.LEAD_ID)"><i class="fa fa-check-square"></i> Accept Meeting</button>
+                <button class="btn btn-sm btn-danger text-white ml-1" 
+                [disabled]="at.LEAD_STATUS_NAME === 'Meeting Accepted'"  
+                (click)="reschedule(at.LEAD_ID)"><i class="fa fa-window-close"></i> Reschedule</button> 
+            </div>
+        </div>
+        <div *ngFor="let at of agentMeetingDetails | async">
+        <a routerLink="/agentleads/edit/{{at.LEAD_ID}}">
+        <a class="btn btn-sm btn-secondary text-white ml-1"><i class="fas fa-undo-alt"></i> Return to lead details</a></a>
+    </div>
+    </form>
+</div>
+
+
+
+

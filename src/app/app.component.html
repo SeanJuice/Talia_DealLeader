@@ -1,0 +1,208 @@
+<script>
+  $(document).ready(function(){
+    $(".siderbar_menu li").click(function(){
+      $(".siderbar_menu li").removeClass("active");
+      $(this).addClass("active");
+    });
+
+    $(".hamburger").click(function(){
+      $(".wrapper").addClass("active");
+    });
+
+    $(".close, .bg_shadow").click(function(){
+      $(".wrapper").removeClass("active");
+    });
+   
+   
+   });
+</script>
+
+<div class="wrapper">
+  <div class="top_navbar">
+    <div class="hamburger">
+       <div class="hamburger__inner">
+         <div class="one"></div>
+         <div class="two"></div>
+         <div class="three"></div>
+       </div>
+    </div>
+    <div class="menu">
+      <div class="logo" style="font-size: 30px;"><b> Deal Leader Group</b>
+      </div>
+      <div class="right_menu">
+        <ul>
+          <li>
+            <a routerLink='/profile' routerLinkActive='active' id="navLogin" style="color: white;">SignUp/Login</a>
+          </li>
+          <li id="navLogout"><i class="fas fa-user ml-3" style="font-size:23px;"></i>
+            <div class="profile_dd">
+               <div class="dd_item" routerLink='/profile' routerLinkActive='active'>Profile</div>
+               <div class="dd_item" (click)="Logout()">Logout</div>
+            </div>
+          </li>
+          <li id="navEmployeeLogout"><i class="fas fa-user ml-3" style="font-size:23px;"></i>
+            <div class="profile_dd">
+               <div class="dd_item" routerLink='/employeeprofile' routerLinkActive='active'>Profile</div>
+               <div class="dd_item" (click)="Logout()">Logout</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+        $(document).ready(function(){
+            $(".hamburger .hamburger__inner").click(function(){
+              $(".wrapper").toggleClass("active")
+            })
+
+            $(".top_navbar .fas").click(function(){
+               $(".profile_dd").toggleClass("active");
+            });
+        })
+    </script>
+
+
+  <div class="main_container">
+    <div class="sidebar">
+        <div class="sidebar__inner">
+          <ul class="siderbar_menu">
+            <ul class="right hide-on-med-and-down" id="navAccess">
+            <li >
+              <a>
+                <span class="icon"><i class="fab fa-delicious"></i></span>
+                <span class="title">Access</span>
+              </a>
+              <ul>
+                <li> <a routerLink='/userrole-list' routerLinkActive='active'>User Role</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="right hide-on-med-and-down" id="navAgent">
+            <li >
+              <a >
+                <span class="icon"><i class="fab fa-elementor"></i></span>
+                <span class="title">Agent</span>
+              </a>
+              <ul>
+                <li> <a routerLink='/leads' routerLinkActive='active'>View Leads</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="right hide-on-med-and-down" id="navLeads">
+            <li >
+              <a >
+                <span class="icon"><i class="fab fa-elementor"></i></span>
+                <span class="title">Leads</span>
+              </a>
+              <ul>
+                <li> <a routerLink='/lead' routerLinkActive='active'>Add Lead</a></li>
+                <li> <a routerLink='/agentleads' routerLinkActive='active'>View Leads</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="right hide-on-med-and-down" id="navAdmin">
+            <li >
+              <a>
+                <span class="icon"><i class="fas fa-folder"></i></span>
+                <span class="title">Admin</span>
+              </a>
+              <ul>
+                <li> <a routerLink='/agentlist' routerLinkActive='active'>View Agent RFR</a></li> 
+                <li> <a routerLink='/commission-list' routerLinkActive='active'>Commission</a></li>
+                <li> <a routerLink='/coundition-list' routerLinkActive='active'>Condition</a></li>
+                <li> <a routerLink='/meetingtypelist' routerLinkActive='active'>Meeting Type</a></li>
+                <li> <a routerLink='/agenttype-list' routerLinkActive='active'>Agent Type</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="right hide-on-med-and-down" id="navEmployee">
+            <li >
+              <a>
+                <span class="icon"><i class="fas fa-address-book"></i></span>
+                <span class="title">Employee</span>
+              </a> 
+            <ul>
+              <li> <a routerLink='/employee-list' routerLinkActive='active'>Employee List</a></li>
+              <li> <a routerLink='/employee-type-list' routerLinkActive='active'>Employee Types</a></li>
+            </ul>
+          </li> 
+          </ul>
+          <ul class="right hide-on-med-and-down" id="navCountry">
+            <li >
+              <a >
+                <span class="icon"><i class="fas fa-flag"></i></span>
+                <span class="title">Country</span>
+              </a>
+              <ul>
+                <li> <a routerLink='/country-list' routerLinkActive='active'>Country</a></li>
+              </ul>
+            </li>
+          </ul> 
+          <ul class="right hide-on-med-and-down" id="navReports">
+            <li >
+              <a>
+                <span class="icon"><i class="fas fa-chart-pie"></i></span>
+                <span class="title">Reports</span>
+              </a>
+              <ul>
+                <li> <a routerLink='/leadetails' routerLinkActive='active'>Lead Details</a></li>
+                <li> <a routerLink='/leadhistory' routerLinkActive='active'>Agent Lead History </a></li>
+                <li> <a routerLink='/agentsignup' routerLinkActive='active'>Agent SignUp </a></li>
+                <li> <a routerLink='/justproducts' routerLinkActive='active'>Products </a></li>
+                <li> <a routerLink='/productssold' routerLinkActive='active'>Products Sold </a></li>
+                <li> <a routerLink='/supplierreport' routerLinkActive='active'>Supplier </a></li>
+              </ul>
+            </li>
+          </ul> 
+          <ul class="right hide-on-med-and-down" id="navSupplier">
+            <li>
+              <a href="#">
+                <span class="icon"><i class="fas fa-address-book"></i></span>
+                <span class="title">Supplier</span>
+              </a> 
+            <ul>
+              <li> <a routerLink='/supplierlist' routerLinkActive='active'>Supplier</a></li>
+            </ul>
+          </li> 
+          </ul>
+          <ul class="right hide-on-med-and-down" id="navProducts">
+            <li >
+              <a>
+                <span class="icon"><i class="fas fa-folder"></i></span>
+                <span class="title">Product</span>
+              </a>
+              <ul>
+                <li> <a routerLink='/productcategorylist' routerLinkActive='active'>Product Category</a></li>
+                <li> <a routerLink='/producttypelist' routerLinkActive='active'>Product Type</a></li>
+                <li> <a routerLink='/productlist' routerLinkActive='active'>Product</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="right hide-on-med-and-down"  id="navHelp">
+            <li >
+              <a>
+                <span class="icon"><i class="fas fa-folder"></i></span>
+                <span class="title">Help</span>
+              </a>
+              <ul>
+                <li> <a routerLink='/contact' routerLinkActive='active'>Contact Us</a></li>
+              </ul>
+              <ul>
+                <li> <a routerLink='/bot' routerLinkActive='active'>ChatBot</a></li>
+              </ul>
+              <ul>
+                <li> <a routerLink='/system' routerLinkActive='active'>System Description</a></li>
+              </ul>
+              <ul>
+                <li> <a routerLink='/helpdoc' routerLinkActive='active'>Help Doc</a></li>
+              </ul>
+            </li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="container">
+        <router-outlet></router-outlet>
+        </div>
+    </div>

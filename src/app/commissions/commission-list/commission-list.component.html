@@ -1,0 +1,53 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center">Commissions</h1>
+  <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+  <hr>
+  <br>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder= "Search" aria-label="Search Agent" aria-label="SearchAgent"  [(ngModel)]="SearchCommission" autocomplete="off">
+  </div>
+    <br>
+
+<div>  
+  <!--Download Excel-->
+  <button class="btn btn-xs btn-outline-secondary " (click)="exportAsXLSX()" >Download Excel</button> 
+  <button class="btn btn-xs btn-outline-success ml-2" (click)="captureScreen()" >Download PDF</button> 
+  <a routerLink="/commission">
+  <button class="btn btn-xs btn-outline-success ml-2" >Add Commission</button> 
+  </a>
+  <!--Download Graph-->
+  <br>
+  <br> 
+  <br>
+  </div> 
+  <div id="contentToConvert">
+  <div  style="background-color: white;">
+    <p align="center">Percentage vs Date</p>
+    <div class="row">
+        <div class="col-md-8 mx-auto p-5 m-3" >
+            <canvas id="canvas1" chart-labels="labels"  chart-legend="true"></canvas>
+        </div>
+    </div>
+  </div>
+
+<table class="table table-hover" id="myTable">
+<tr class="trhead">
+        <th>Commission Percentage </th>
+        <th>Commission Date</th>
+        <th></th>
+        
+    </tr>
+    <tr *ngFor="let at of service.list | filter:SearchCommission">
+        <td >{{at.COMMISSION_PERCENTAGE}}</td>
+        <td >{{at.COMMISSION_DATE | date : "y.MM.dd"}}</td>
+
+         <td> 
+            <a routerLink="/commissionupdate/{{at.COMMISSION_ID}}">
+            <button class="btn btn-xs btn-outline-info " (click)="populateForm(at)">Update</button> 
+          </a>
+            <button class="btn btn-xs btn-outline-danger ml-1" (click)="onDelete(at.COMMISSION_ID)" >Delete</button> 
+
+        </td> 
+      </tr>
+</table>
+</div>

@@ -1,0 +1,43 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Update Agent Type</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+    <hr>
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <input type="hidden" name="AGENT_TYPE_ID" #AGENT_TYPE_ID="ngModel" [(ngModel)]="service.formData.AGENT_TYPE_ID">
+
+    <div class="form-group">
+        <label>Agent Type Name</label>
+        <input  name="AGENT_TYPE_NAME" #AGENT_TYPE_NAME="ngModel"
+         [(ngModel)]="service.formData.AGENT_TYPE_NAME" 
+        class="form-control"
+         required
+        pattern="[a-zA-Z\s]+"
+        maxlength="50"
+        minlength="2"/>
+        <div class="validation-error" *ngIf="AGENT_TYPE_NAME.invalid &&  AGENT_TYPE_NAME.touched">
+            <div *ngIf="AGENT_TYPE_NAME.errors.required">
+                This field is required. 
+            </div>
+
+            <div *ngIf="AGENT_TYPE_NAME.errors.pattern">
+              Name can contain no numbers!
+            </div>
+
+            <div *ngIf="AGENT_TYPE_NAME.errors.minlength">
+            Name should be at least 2 characters.
+            </div>
+
+        </div>
+       
+    </div>
+  
+    <div class="w3-show-inline-block" >  
+        <button type="submit" [disabled]="form.invalid" class="btn btn-xs btn-info">Save</button>
+        <a routerLink="/agenttype-list">
+        <button  class="btn btn-xs btn-danger ml-1" >Return </button></a>
+    </div>
+</form>
+</div>
+
+
+

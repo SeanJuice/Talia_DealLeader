@@ -1,0 +1,37 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center">Product Types</h1>
+  <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+  <hr>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder= "Search" aria-label="Search Agent" aria-label="SearchAgent"  [(ngModel)]="SearchProdType" autocomplete="off">
+  </div>
+<br>
+
+<a routerLink="/producttype">
+  <button class="btn btn-xs btn-outline-success" ><i class="far fa-plus-square"></i> Add Product Type</button> 
+</a>
+<br>
+<br>
+
+<table class="table table-hover" id="myTable">
+    <tr class="trhead">
+        <th>Product Type Name</th>
+        <th>Product Type Description</th>
+        <th></th>
+        
+    </tr>
+   <tr *ngFor="let at of data | filter:SearchProdType"> 
+  
+        <td >{{at.PRODUCT_TYPE_NAME}}</td>
+        <td >{{at.PRODUCT_TYPE_DESCRIPTION}}</td> 
+       
+        <td>    
+          <a routerLink="/producttypes/{{at.PRODUCT_TYPE_ID}}">
+            <button class="btn btn-xs btn-outline-info " (click)="populateForm(at)">Update</button> 
+          </a>
+            <button class="btn btn-xs btn-outline-danger ml-1" (click)="onDelete(at.PRODUCT_TYPE_ID)" >Delete</button> 
+        </td>
+      </tr>
+</table>
+</div>
+

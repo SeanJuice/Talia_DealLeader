@@ -1,0 +1,36 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Update User Role</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+    <hr>
+    <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    
+        <input type="hidden" name="USER_ROLE_ID" #USER_ROLE_ID="ngModel" 
+            [(ngModel)]="service.formData.USER_ROLE_ID">
+    
+        <div class="form-group">
+            <label>User Role Name</label>
+            <input name="USER_ROLE_NAME" #USER_ROLE_NAME="ngModel" 
+                [(ngModel)]="service.formData.USER_ROLE_NAME" 
+                class="form-control" 
+                required
+                pattern="[a-zA-Z\s]+"
+                maxlength="15"
+                minlength="2">
+                <div class="validation-error" *ngIf="USER_ROLE_NAME.invalid && USER_ROLE_NAME.touched">
+                    <div  *ngIf="USER_ROLE_NAME.errors.required">
+                        This field is required.</div>
+                    <div  *ngIf="USER_ROLE_NAME.errors.pattern ">
+                        User Role Name can contain no numbers!</div>
+                    <div *ngIf="USER_ROLE_NAME.errors.minlength ">
+                        User Role Name should be atleast 2 characters.</div>
+                </div>       
+        </div>
+    
+        <div class="w3-show-inline-block" >
+            <button type="submit" [disabled]="form.invalid" class="btn btn-xs btn-info">Save</button>
+            <a routerLink="/userrole-list">
+            <button class="btn btn-xs btn-danger ml-1" > Return </button>
+                </a>
+        </div>
+    </form>
+    </div>

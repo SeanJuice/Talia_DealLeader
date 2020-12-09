@@ -1,0 +1,115 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Submit Quote</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+    <hr> 
+    <a href="http://localhost:8080/CaptureQuote.html">Additional Help</a><br>
+    <br>
+    <div class="row">
+    <div class="form-group col-md-6" *ngFor="let at of leadDetails | async">
+        <input type="hidden" value="{{at.PRODUCT_ID}}" id="">
+        <input type="hidden" value="{{at.LEAD_ID}}" id="">
+            <div class="row">
+                <p>Product:  </p> 
+                <a class="ml-3">{{at.PRRODUCT_NAME}}</a>
+            </div>
+            <div class="row">
+                <p>Year of Make:  </p> 
+                <a class="ml-3">{{at.YEA_OF_MAKE}}</a>
+            </div>
+            <div class="row">
+                <p>Condition:  </p> 
+                <a class="ml-3">{{at.CONDITION_NAME}}</a>
+            </div>
+            <div class="row">
+                <p>Quantity:  </p> 
+                <a class="ml-3">{{at.QUANTITY}}</a>
+            </div>
+    </div>
+    <div class="form-group">
+        <div style="font-size: 30px;">
+            <i class="fas fa-money-check fa-4x"></i>
+        </div>
+    </div>
+</div>
+<hr>
+<p class="text-center">
+    Select supplier whose quote you are recording. Only once you have selected a supplier will the send quote button become available.
+</p>
+<div class="row">
+    <table class="table">
+        <thead class="thead-light">
+            <th>Supplier Name</th>
+            <th>Email Address</th>
+            <th>Supplier Contact No.</th>
+        </thead>
+        <tbody>
+            <tr *ngIf="(RFQDetails | async)?.length==0">
+                <td class="font-italic text-center" style="color: red;" colspan="5">
+                    Please send a request for quotes for the product before being able to submit a quote
+                </td>
+            </tr>
+            <tr *ngFor="let item of RFQDetails | async">
+                <td >{{item.SUPPLIER_NAME}}</td>
+                <td >{{item.SUPPLIER_EMAIL_ADDRESS}}</td>
+                <td >{{item.SUPPLIER_CONTACT_NO}}</td>
+                <td *ngFor="let at of leadDetails | async">
+                  <a class="btn btn-sm btn-info text-white" 
+                  (click)="SelectRFQ(item.REQUEST_FOR_QUOTE_ID)" ><i class="far fa-check-square"></i> Select Supplier</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+            <hr>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label>Quote Amount</label><label style="color: red;">  *</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                                <i class="fas fa-money-check-alt"></i>
+                            </div>
+                        </div>
+                        <input
+                        #AMOUNT 
+                        class="form-control" 
+                        type="number"
+                        min="0"
+                        step="0.1"
+                        required
+                        oninput="validity.valid||(value='');">
+                    </div>
+                </div>
+                <div class="form-group col-md-6" *ngFor="let item of SelectedRFQDetails | async">
+                    <div class="row">
+                        <p>Supplier Name:  </p> 
+                        <a class="ml-3">{{item.SUPPLIER_NAME}}</a>
+                    </div>
+                    <div class="row">
+                        <p>Supplier Email Address:  </p> 
+                        <a class="ml-3">{{item.SUPPLIER_EMAIL_ADDRESS}}</a>
+                    </div>
+                    <div class="row">
+                        <p>Supplier Contact No:  </p> 
+                        <a class="ml-3">{{item.SUPPLIER_CONTACT_NO}}</a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+            <div class="form-group col-md-6" *ngFor="let item of SelectedRFQDetails | async">
+                <div class="form-group col-md-6" *ngFor="let at of leadDetails | async">
+                    <a ></a>
+                    <button type="submit" class="btn btn-sm btn-info text-white btn-block" (click)="submitQuote(item.REQUEST_FOR_QUOTE_ID, item.SUPPLIER_ID,
+                    at.PRODUCT_ID, AMOUNT.value, at.LEAD_ID)" ><i class="fas fa-paper-plane"></i> Submit Quote</button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" *ngFor="let at of leadDetails | async">
+        <a class="btn btn-sm btn-secondary text-white" (click)="ReturnToLeadDetails(at.LEAD_ID)"><i class="fa fa-hand-point-left"></i> Return to lead details</a> 
+    </div>
+        </div>
+
+
+
+

@@ -1,0 +1,90 @@
+<!-- <label>Do you want to confirm this date? </label>
+{{data.date}}
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No </button>
+    <button mat-button  cdkFocusInitial>Yes</button>
+  </div> -->
+
+  
+<div class="jumbotron">
+  <div style="border-color: #396e6a">
+              
+      <h1 style="text-align: center; border-style: solid;
+      border-width: 2px; border-color: #396e6a; border-radius: 50px; padding: 10px 10%; ">Book Meeting for: {{Date | date: 'yyyy/MM/dd'}}</h1>
+  </div>
+  
+  
+  <form #form="ngForm"  autocomplete="off">
+
+    <div class="row">
+      <div class="col-md-6">
+      <label for="startdate">Start Time:</label>
+      <br>
+      <input [(ngModel)]="startTime"
+      [ngModelOptions]="{standalone: true}"
+      class="form-control " 
+      type="time"
+      >
+    </div>
+      <div class="col-md-6">
+      <label for="enddate" class="ml-3">End Time:</label>
+      <br>
+      <input [(ngModel)]="endTime"
+      [ngModelOptions]="{standalone: true}"
+      class="form-control " 
+      type="time"
+      >
+
+    </div>
+    <br>
+    <br>
+    </div>
+    <br>
+  
+  <div class="form-group">
+  <label>Meeting Type</label>
+  <select 
+  [(ngModel)]="MEETING_TYPE_ID"
+  [ngModelOptions]="{standalone: true}"
+  class="form-control " 
+  required 
+  pattern="[a-zA-Z\s]" 
+  maxlength="50" 
+  minlength="2">
+  <option value=1>Discussion Meeting</option>
+  <option value=3>Inspection</option>
+  <option value=6>Finalize Lead</option>
+  </select>
+  
+  </div>
+  
+  
+  <div class="form-group">
+  <label>Meeting Location</label>
+  <input 
+  [(ngModel)]="MEETING_LOCATION"
+  [ngModelOptions]="{standalone: true}"
+  class="form-control" 
+  required 
+  maxlength="500" 
+  minlength="2">
+  </div>
+  <!-- <div class="validation-error" *ngIf="MEETING_LOCATION.invalid && MEETING_LOCATION.touched">
+      <div *ngIf="MEETING_LOCATION.errors.required">
+          This field is required </div>
+        <div *ngIf="MEETING_LOCATION.errors.minlength">
+              Meeting Location should be atleast 2 characters</div>
+              <div *ngIf="MEETING_LOCATION.errors.maxlength">
+                  Meeting Location cannot contain more than 50 characters</div>
+  </div>  -->
+  <div class="w3-show-inline-block" >
+  
+    <button class="btn btn-xs " (click)="bookMeeting(startTime, endTime, MEETING_TYPE_ID, MEETING_LOCATION, LEAD_ID, Date )">Book Meeting</button>
+    
+    <button type="reset"  class="btn btn-xs " value="Cancel" (click)="onNoClick()">Return to Calender</button>
+  </div>
+    </form>
+    </div>
+  
+
+

@@ -1,0 +1,74 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Agent Profile</h1>
+    <br>
+    <br>
+
+<div class="form-group col-md-6" *ngFor="let at of agentDetails | async">
+  <div class="row">
+      <p>Agent ID:  </p> 
+      <a class="ml-3">{{at.AGENT_ID}}</a>
+  </div>
+  <div class="row">
+      <p>Firstname:  </p> 
+      <a class="ml-3">{{at.AGENT_NAME}}</a>
+  </div>
+  <div class="row">
+      <p>Surname:  </p> 
+      <a class="ml-3">{{at.AGENT_SURNAME}}</a>
+  </div>
+  <div class="row">
+      <p>Company Name:  </p> 
+      <a class="ml-3">{{at.AGENT_COMPANY_NAME}}</a>
+  </div>
+  <div class="row">
+      <p>Company Registration:  </p> 
+      <a class="ml-3">{{at.AGENT_COMPANY_REGISTRATION}}</a>
+  </div>
+  <div class="row">
+      <p>Contact No.:  </p> 
+      <a class="ml-3">{{at.AGENT_CONTACT_NO}}</a>
+  </div>
+  <div class="row">
+      <p>Email Address:  </p> 
+      <a class="ml-3">{{at.AGENT_EMAIL_ADDRESS}}</a>
+  </div>
+  <div class="row">
+      <p>ID No.:  </p> 
+      <a class="ml-3">{{at.AGENT_ID_NO}}</a>
+  </div>
+  <div class="row">
+      <p>Passport No.:  </p> 
+      <a class="ml-3">{{at.AGENT_PASSPORT_NO}}</a>
+  </div>
+  <div class="row">
+      <p>Country:  </p> 
+      <a class="ml-3">{{at.COUNTRY_NAME}}</a>
+  </div>
+  <div class="row">
+      <p>Title:  </p> 
+      <a class="ml-3">{{at.TITLE_NAME}}</a>
+  </div>
+  <div class="row">
+      <p>Status:  </p> 
+      <a class="ml-3">{{at.AGENT_STATUS_NAME}}</a>
+  </div>
+  <div class="row">
+      <p>Agent Type:  </p> 
+      <a class="ml-3">{{at.AGENT_TYPE_NAME}}</a>
+  </div>
+</div>
+<div class="form-group col-md-6" *ngFor="let at of agentDetails | async">
+    <br>
+    <br>
+    <br>
+    <a routerLink="/maintainagent/{{at.AGENT_ID}}">
+    <a class="btn btn-sm btn-success text-white"  (click)="populateForm(at)"><i class="fa fa-check-square"></i> Maintain Details</a></a>
+
+    <a routerLink="/reset/{{at.USER_ID}}">
+    <a class="btn btn-sm btn-danger text-white ml-1" ><i class="fa fa-window-close"></i> Reset Password</a></a> 
+</div>
+</div>
+
+
+
+

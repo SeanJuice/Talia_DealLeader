@@ -1,0 +1,71 @@
+
+
+<div style="border-color: #396e6a">
+            
+    <h1 style="text-align: center; border-style: solid;
+    border-width: 2px; border-color: #396e6a; border-radius: 50px; padding: 10px 10%; ">Book Meeting for: {{Date | date}}</h1>
+    <h1 style="text-align: center; border-style: solid;
+    border-width: 2px; border-color: #396e6a; border-radius: 50px; padding: 10px 10%; ">Time: {{Start}} - {{End}}</h1>
+</div>
+
+
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+
+<!-- <input type="hidden" name="MEETING_ID" #MEETING_ID="ngModel" [(ngModel)]="service.formData.MEETING_ID"> -->
+
+
+<!-- <div class="form-group">
+<label>Meeting Type</label>
+<select name="MEETING_TYPE_ID" MEETING_TYPE_ID="ngModel" ngModel
+class="form-control " required pattern="[a-zA-Z][a-zA-Z]+" maxlength="50" minlength="2">
+<option *ngFor="let m of MEETING_TYPE" [value]="m.MEETING_TYPE_ID">{{m.MEETING_TYPE_NAME}}</option>
+</select>
+ validation -->
+<!-- <div class="validation-error" *ngIf="MEETING_TYPE.invalid && MEETING_TYPE.touched">
+    <div *ngIf="SUPPLIER_NAME.errors.required">
+        This field is required </div>
+        <div *ngIf="SUPPLIER_NAME.errors.pattern">
+            Name can contain no numbers!</div>
+        <div *ngIf="SUPPLIER_NAME.errors.minlength">
+            Name should be atleast 2 characters</div>
+            <div *ngIf="SUPPLIER_NAME.errors.maxlength">
+                Name cannot contain more than 50 characters</div>
+            
+</div> -->
+<!-- </div> -->
+
+<div class="form-group">
+<label>Meeting Type</label>
+<select name="MEETING_TYPE_ID" MEETING_TYPE_ID="ngModel" ngModel
+class="form-control " required pattern="[a-zA-Z][a-zA-Z]+" maxlength="50" minlength="2">
+<option value=1>Discussion Meeting</option>
+<option value=2>Inspection</option>
+<option value=3>Finalize Lead</option>
+</select>
+
+</div>
+
+
+<div class="form-group">
+<label>Meeting Location</label>
+<input name="MEETING_LOCATION" #MEETING_LOCATION="ngModel" ngModel
+class="form-control" required maxlength="100" minlength="2">
+<!-- validation - -->
+<!--     <div class="validation-error" *ngIf="MEETING_LOCATION.invalid && MEETING_LOCATION.touched">
+    <div *ngIf="MEETING_LOCATION.errors.required">
+        This field is required </div>
+      <div *ngIf="MEETING_LOCATION.errors.minlength">
+            Meeting Location should be atleast 2 characters</div>
+            <div *ngIf="MEETING_LOCATION.errors.maxlength">
+                Meeting Location cannot contain more than 50 characters</div>
+</div> -->
+</div>
+
+<div class="w3-show-inline-block" >
+
+<button type="submit"  class="btn btn-xs ">Book Meeting</button> &nbsp;
+
+<button type="reset"  class="btn btn-xs " value="Cancel" (click)="GoBack()">Return to Calender </button>
+
+</div>
+</form>

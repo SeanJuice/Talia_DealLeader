@@ -1,0 +1,59 @@
+<hr>
+<div class="jumbotron">
+<h1 class="display-4 text-center">Supplier Report</h1>
+<a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+<hr>
+<div class="alert alert-secondary" role="alert" >
+  This report will contain information about all suppliers who exist in the system.
+</div>
+<hr>
+  
+
+<div class="loginpic">
+<button  class=" btn-sm btn-secondary text-white " (click)="GenerateReport()">Generate Report</button>
+<button  class="btn-sm btn-info text-white ml-1" (click)="DownloadPDF()">Download as PDF</button>
+</div>
+  <hr>
+<div id="ChartDiv"id="contentToConvert" >
+  <canvas id="canvas"></canvas>
+  <h1 class="display-4 text-center">Supplier Report</h1> 
+
+<div *ngFor="let item of TableData; let i = index" >
+  <br>
+<table id="testing{{i}}" style="width: 100%;">
+
+<thead class="thead-light">
+<tr>
+  <th>Supplier Name</th>
+  <th>Contact Number</th>
+  <th>Email Address</th>
+  <th>Physical Address</th>
+  <th>Country</th>
+  <th>Rating</th>
+  
+  
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let supplier of item.Supplier">
+  <td>{{supplier.supplier}}</td>
+  <td>{{supplier.contact}}</td>
+  <td>{{supplier.email}}</td>
+  <td>{{supplier.address}}</td>
+  <td>{{supplier.country}}</td>
+  <td>{{supplier.rating}}</td>
+  
+  
+</tr>
+</tbody>
+<br>
+<div *ngIf="TableData" id="controlBreak">
+  <div>Total Suppliers : {{totalCount}}</div>
+  </div>
+<br>
+<div class="loginpic">
+  <img style="width: 300px; height: 250px;" class="display-inline-block" [src]="imageUrl">
+  </div>
+</table>
+
+</div>

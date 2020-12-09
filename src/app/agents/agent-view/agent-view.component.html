@@ -1,0 +1,79 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Accept/Decline Agent Request for Registration</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a><br>
+    <br>
+    <br>
+
+<div class="form-group col-md-6" *ngFor="let at of agentDetails | async">
+  <div class="row">
+      <p>Agent ID:  </p> 
+      <a class="ml-3">{{at.AGENT_ID}}</a>
+  </div>
+  <div class="row">
+      <p>Firstname:  </p> 
+      <a class="ml-3">{{at.AGENT_NAME}}</a>
+  </div>
+  <div class="row">
+      <p>Surname:  </p> 
+      <a class="ml-3">{{at.AGENT_SURNAME}}</a>
+  </div>
+  <div class="row">
+      <p>Company Name:  </p> 
+      <a class="ml-3">{{at.AGENT_COMPANY_NAME}}</a>
+  </div>
+  <div class="row">
+      <p>Company Registration:  </p> 
+      <a class="ml-3">{{at.AGENT_COMPANY_REGISTRATION}}</a>
+  </div>
+  <div class="row">
+      <p>Contact No.:  </p> 
+      <a class="ml-3">{{at.AGENT_CONTACT_NO}}</a>
+  </div>
+  <div class="row">
+      <p>Email Address:  </p> 
+      <a class="ml-3">{{at.AGENT_EMAIL_ADDRESS}}</a>
+  </div>
+  <div class="row">
+      <p>ID No.:  </p> 
+      <a class="ml-3">{{at.AGENT_ID_NO}}</a>
+  </div>
+  <div class="row">
+      <p>Passport No.:  </p> 
+      <a class="ml-3">{{at.AGENT_PASSPORT_NO}}</a>
+  </div>
+  <div class="row">
+      <p>Country:  </p> 
+      <a class="ml-3">{{at.COUNTRY_NAME}}</a>
+  </div>
+  <div class="row">
+      <p>Title:  </p> 
+      <a class="ml-3">{{at.TITLE_NAME}}</a>
+  </div>
+  <div class="row">
+      <p>Status:  </p> 
+      <a class="ml-3">{{at.AGENT_STATUS_NAME}}</a>
+  </div>
+  <div class="row">
+      <p>Agent Type:  </p> 
+      <a class="ml-3">{{at.AGENT_TYPE_NAME}}</a>
+  </div>
+</div>
+<div class="form-group col-md-6">
+    <button class="btn btn-sm btn-success text-white" *ngFor="let at of agentDetails | async" 
+    [disabled]="at.AGENT_STATUS_NAME === 'Accepted' || at.AGENT_STATUS_NAME === 'Declined'"
+    (click)="acceptAgentRFR(at.AGENT_ID, at.USER_ID)"><i class="fa fa-check-square"></i> Accept Request for Registration</button>
+    <button class="btn btn-sm btn-danger text-white ml-1" *ngFor="let at of agentDetails | async" 
+    [disabled]="at.AGENT_STATUS_NAME === 'Accepted' || at.AGENT_STATUS_NAME === 'Declined'"
+    (click)="declineAgentRFR(at.AGENT_ID)"><i class="fa fa-window-close"></i> Decline Request for Registration</button> 
+</div>
+<hr>
+<br>
+<div>
+    <a routerLink="/agentlist">
+    <a class="btn btn-sm btn-secondary text-white ml-1"><i class="fas fa-undo-alt"></i> Return to Agent List</a></a>
+</div>
+</div>
+
+
+
+

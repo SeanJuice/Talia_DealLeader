@@ -1,0 +1,59 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Quote Details</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+    <br>
+    <hr>
+    <div class="row">
+        <th></th>
+        <tr *ngIf="(quoteDetails | async)?.length==0" class="display-4 text-center">
+            <td class="font-italic text-center" colspan=" 1">
+                No quote submitted for your lead yet. Please check back later :)
+            </td>
+        </tr>   
+    </div>
+    <form action="">
+        <div class="row">
+            <div class="form-group col-md-6" *ngFor="let at of quoteDetails | async">
+                    <div class="row">
+                        <p>Lead ID:  </p> 
+                        <a class="ml-3">{{at.LEAD_ID}}</a>
+                    </div>
+                    <div class="row">
+                        <p>Amount: R  </p> 
+                        <a class="ml-3">{{at.AMOUNT}}</a>
+                    </div>
+                    <div class="row">
+                        <p>Status:  </p> 
+                        <a class="ml-3">{{at.QUOTE_STATUS_NAME}}</a>
+                    </div>
+                <div class="row">
+                    <p>Product Name:  </p> 
+                    <a class="ml-3"*ngFor="let pd of quoteProductDetails | async">{{pd.PRODUCT_NAME}}</a>
+                </div>
+                <div class="row">
+                    <p>Quantity:  </p> 
+                    <a class="ml-3" *ngFor="let pd of quoteProductDetails | async">{{pd.QUANTITY}}</a>
+                </div>
+            </div>
+        </div>
+            <div class="row">
+            <div class="form-group col-md-6"  *ngFor="let at of quoteDetails | async">
+                <br>
+                <br>
+                <br>
+                <button class="btn btn-sm btn-success text-white" *ngFor="let at of quoteDetails | async"
+                [disabled]="at.QUOTE_STATUS_NAME === 'Accepted' || at.QUOTE_STATUS_NAME === 'Declined'" 
+                (click)="acceptQuote(at.LEAD_ID)"><i class="fa fa-check-square"></i> Accept Quote</button>
+                <button class="btn btn-sm btn-danger text-white ml-1" 
+                [disabled]="at.QUOTE_STATUS_NAME === 'Accepted' || at.QUOTE_STATUS_NAME === 'Declined'"  
+                (click)="declineQuote(at.LEAD_ID)"><i class="fa fa-window-close"></i> Deline Quote</button> 
+            </div>
+        </div>
+        <div *ngFor="let at of quoteDetails | async">
+        <a routerLink="/agentleads/edit/{{at.LEAD_ID}}">
+        <a class="btn btn-sm btn-secondary text-white ml-1"><i class="fas fa-undo-alt"></i> Return to lead details</a></a>
+    </div>
+    </form>
+</div>
+
+

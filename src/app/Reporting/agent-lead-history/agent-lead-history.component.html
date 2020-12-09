@@ -1,0 +1,96 @@
+<hr>
+<div class="jumbotron">
+<h1 class="display-4 text-center">Agent Lead History Report</h1>
+<a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+<hr>
+<div class="alert alert-secondary" role="alert">
+   This report will contain information about agent lead history.
+  </div>
+  <br>
+  <br>
+
+    
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder= "Start searching an agent name or surname" aria-label="Search Agent" aria-label="SearchAgent"  [(ngModel)]="SearchAgent" autocomplete="off">
+    <div class="input-group-append">
+      <button class="btn fas fa-search" type="submit" id="SearchAgent"></button>
+    </div>
+  </div>
+  
+  <br>
+  <br>
+ 
+<hr>
+        <div class="row" >
+            <table class="table"  style="width: 100%;">
+                <thead class="thead-light colspan-4" >
+                    <th>Agent Name</th>
+                    <th>Agent Surname</th>
+                    <th></th>
+                </thead>
+                <tbody *ngFor="let item of agents | async | filter:SearchAgent">
+                    <tr >
+                        <td >{{item.AGENT_NAME}}</td>
+                        <td >{{item.AGENT_SURNAME}}</td>
+                        <td >
+                          <a class="btn btn-sm btn-info text-white"
+                          (click)="GenerateReport(item.AGENT_ID)"><i class="fa fa-info-circle"></i> Generate Report</a>
+                          <a class="btn btn-sm btn-secondary text-white ml-1"
+                          (click)="DownloadPDF()"><i class="fa fa-info-circle"></i> Download PDF</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+<br>
+<br>
+
+<div id="ChartDiv" id="contentToConvert" >
+  <canvas id="canvas"></canvas> 
+  <h1 class="display-4 text-center">Agent Lead History Report</h1> 
+    
+      <div *ngFor="let item of TableData;let i = index"  >
+        <div class="row">
+        <caption class="loginpic display-5"><strong>{{item.AGENT_NAME}}</strong></caption>
+        </div>
+        <table class="table-latitude" id="testing{{i}}" style="width: 100%;">
+          <thead class="thead-light">
+            <tr>
+              <th>Lead Number</th>
+              <th>Quantity of Products</th>
+              <th>Product Name</th>
+              <th> Product Category</th>
+              <th>Product Type</th>
+              <th>Year of Make</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lead of item.Leads">
+              <td>{{lead.lead}}</td>
+              <td>{{lead.quantity}}</td>
+              <td>{{lead.product}}</td>
+              <td>{{lead.year}}</td>
+              <td>{{lead.type}}</td>
+              <td>{{lead.category}}</td>
+                
+              </tr>
+            
+        </tbody>
+        <br>
+        <div *ngIf="TableData" id="controlBreak">
+                <div>Total Agent Leads : {{totalCount}}</div>
+        </div>
+        <br>
+        <div class="loginpic">
+          <img style="width: 300px; height: 250px;" class="display-inline-block" [src]="imageUrl">
+          </div>
+        </table>
+        <br>
+      </div>
+    
+
+   
+  
+</div>
+
+

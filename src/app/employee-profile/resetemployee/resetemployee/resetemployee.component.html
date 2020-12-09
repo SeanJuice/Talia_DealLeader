@@ -1,0 +1,70 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Reset Password</h1>
+    <hr>
+ <form [formGroup]="updateResetForm" (ngSubmit)="updateForm()" autocomplete="off">
+     
+<div class="form-group" > 
+    <input type="hidden" name="USER_ID" formControlName="USER_ID"> 
+ </div> 
+
+<div class="form-group">
+        <label>New Password</label><label style="color: red;">  *</label>
+         <input 
+        placeholder="New Password"
+        name="PASSWORD" 
+        formControlName="PASSWORD"
+        class="form-control" 
+        type="password">
+</div>
+<div  class="error-messages">
+    <ng-container *ngFor="let error of error_messages.PASSWORD">
+        <div class="error-message" *ngIf="updateResetForm.get ('PASSWORD').
+        hasError(error.type) && (updateResetForm.get ('PASSWORD').dirty ||
+        updateResetForm.get ('PASSWORD').touched)">
+        <div style="color: red;">
+            {{error.message}}
+        </div>
+        </div>
+    </ng-container>
+</div>
+<br>
+<div class="form-group">
+    <label>Confirm New Password</label><label style="color: red;">  *</label>
+     <input 
+    placeholder="Confirm New Password"
+    name="CPASSWORD" 
+    formControlName="CPASSWORD"
+    class="form-control" 
+    type="password">
+</div>
+<div  class="error-messages">
+<ng-container *ngFor="let error of error_messages.CPASSWORD">
+    <div class="error-message" *ngIf="updateResetForm.get ('CPASSWORD').
+    hasError(error.type) && (updateResetForm.get ('CPASSWORD').dirty ||
+    updateResetForm.get ('CPASSWORD').touched)">
+    <div style="color: red;">
+        {{error.message}}
+    </div>
+    </div>
+</ng-container>
+</div>
+<div *ngIf="updateResetForm.get ('CPASSWORD').value !== updateResetForm.get ('PASSWORD').value" style="color: red;">
+    {{dontmatch}}
+</div>
+<!-- <pre>
+    Form Error - {{updateResetForm.errors | json}}
+</pre> -->
+<br>
+    <br>
+
+<div class="w3-show-inline-block" >
+    <div class="w3-show-inline-block" >
+        <button type="submit"  class="btn btn-xs btn-info">Save</button>
+        <a routerLink="/profile">
+        <button  class="btn btn-xs btn-danger ml-1" >Return </button></a>
+    </div>
+</div>
+</form>
+</div>
+
+

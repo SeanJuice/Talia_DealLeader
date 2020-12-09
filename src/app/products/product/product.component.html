@@ -1,0 +1,55 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Add Product</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+    <hr>
+     <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">   
+      
+          <div class="form-group">
+              <label>Product Name</label>
+              <input name="PRODUCT_NAME" #PRODUCT_NAME="ngModel" placeholder="Enter Product Name" 
+              [(ngModel)]="service.formData.PRODUCT_NAME" class="form-control" required>
+              <div class="validation-error" *ngIf="PRODUCT_NAME.invalid && PRODUCT_NAME.touched">This field is required.</div>
+          </div>
+          <div class="form-group">
+              <label>Product Description</label>
+              <input name="PRODUCT_DESCRIPTION" #PRODUCT_DESCRIPTION="ngModel" placeholder="Enter Product Description" 
+              [(ngModel)]="service.formData.PRODUCT_DESCRIPTION" class="form-control" required>
+              <div class="validation-error" *ngIf="PRODUCT_DESCRIPTION.invalid && PRODUCT_DESCRIPTION.touched">This field is required.</div>
+          </div>
+
+           <div class="form-group">
+            <label>Product Type</label><label style="color: red;">  *</label>
+            <select class="selectpicker dropdown mt-4 ml-3" 
+            name="PRODUCT_TYPE_ID" #PRODUCT_TYPE_ID="ngModel"
+             [(ngModel)]="service.formData.PRODUCT_TYPE_ID" class="form-control" required>
+                <option value="null">-Select-</option>
+                <option *ngFor="let item of producttype" 
+                value="{{item.PRODUCT_TYPE_ID}}" class="text-center" required>{{item.PRODUCT_TYPE_NAME}}</option>   
+            </select>
+            <div class="help-block" *ngIf="PRODUCT_TYPE_ID.touched && PRODUCT_TYPE_ID.invalid" style="color: red; font-size: 80%;">Product Type is required is Required!</div>
+        </div>
+
+
+           <div class="form-group">
+               <label>Year Of Make</label>
+   
+               <input name="YEAR_OF_MAKE"  #YEAR_OF_MAKE="ngModel" placeholder="Enter Year Of Make" 
+               maxlength="4"
+                pattern="[0-9]*"
+               [(ngModel)]="service.formData.YEAR_OF_MAKE" class="form-control" required>
+               <div 
+               class="validation-error" 
+               *ngIf="YEAR_OF_MAKE.invalid && YEAR_OF_MAKE.touched">
+                   <div *ngIf="YEAR_OF_MAKE.errors.required">This field is required.</div>
+                   <div *ngIf="YEAR_OF_MAKE.errors.pattern">Year of make should only contain numbers!</div>
+               </div>
+
+           </div>        
+              <div class="w3-show-inline-block" >
+               <button type="submit" [disabled]="form.invalid" class="btn btn-xs ">Save</button>
+               <a routerLink="/productlist">
+               <button class="btn btn-xs ml-1 btn-danger" >Return </button>
+            </a>
+           </div>   
+   </form>
+</div>

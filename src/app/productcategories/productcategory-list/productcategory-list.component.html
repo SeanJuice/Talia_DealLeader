@@ -1,0 +1,39 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center">Product Categories</h1>
+  <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+  <hr>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder= "Search" aria-label="Search Agent" aria-label="SearchAgent"  [(ngModel)]="SearchProdCat" autocomplete="off">
+  </div>
+
+    <br>
+
+    <a routerLink="/productcategory">
+        <button class="btn btn-xs btn-outline-success" ><i class="far fa-plus-square"></i> Add Product Category</button> 
+    </a>
+    <br>
+    <br>
+    
+    <table class="table table-hover" id="myTable">
+        <tr class="trhead">
+            <th>Product Category Name</th>
+            <th>Product Category Description</th>
+            <th></th>
+            
+        </tr>
+       <tr *ngFor="let at of data | filter:SearchProdCat"> 
+      
+            <td >{{at.PRODUCT_CATEGORY_NAME}}</td>
+            <td >{{at.PRODUCT_CATEGORY_DESCRIPTION}}</td> 
+           
+            <td>    
+                <a routerLink="/productcategories/{{at.PRODUCT_CATEGORY_ID}}">
+                  <button class="btn btn-xs btn-outline-info " (click)="populateForm(at)">Update</button> 
+                </a>
+                  <button class="btn btn-xs btn-outline-danger ml-1" (click)="onDelete(at.PRODUCT_CATEGORY_ID)" >Delete</button> 
+              </td>
+          </tr>
+    </table>
+    </div>
+    
+    

@@ -1,0 +1,49 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Employee Profile</h1>
+
+<hr>
+<div class="form-group col-md-6" *ngFor="let at of employeeDetails | async">
+  <div class="row">
+      <p>Employee ID:  </p> 
+      <a class="ml-3">{{at.EMPLOYEE_ID}}</a>
+  </div>
+  <div class="row">
+      <p>Firstname:  </p> 
+      <a class="ml-3">{{at.EMPLOYEE_NAME}}</a>
+  </div>
+  <div class="row">
+      <p>Surname:  </p> 
+      <a class="ml-3">{{at.EMPLOYEE_SURNAME}}</a>
+  </div>
+  <div class="row">
+      <p>Contact No.:  </p> 
+      <a class="ml-3">{{at.EMPLOYEE_CONTACT_NO}}</a>
+  </div>
+  <div class="row">
+      <p>Email Address:  </p> 
+      <a class="ml-3">{{at.EMPLOYEE_EMAIL_ADDRESS}}</a>
+  </div>
+  <div class="row">
+      <p>ID No.:  </p> 
+      <a class="ml-3">{{at.EMPLOYEE_ID_NO}}</a>
+  </div>
+  <div class="row">
+      <p>Passport No.:  </p> 
+      <a class="ml-3">{{at.EMPLOYEE_PASSPORT_NO}}</a>
+  </div>
+</div>
+<div class="form-group col-md-6" *ngFor="let at of employeeDetails | async">
+    <br>
+    <br>
+    <br>
+    <a routerLink="/maintainemployee/{{at.EMPLOYEE_ID}}">
+    <a class="btn btn-sm btn-success text-white"  (click)="populateForm(at)"><i class="fa fa-check-square"></i> Maintain Details</a></a>
+    <a routerLink="/resetemployee/{{at.USER_ID}}">
+        <a class="btn btn-sm btn-danger text-white ml-1" ><i class="fa fa-window-close"></i> Reset Password</a></a> 
+</div>
+</div>
+
+
+
+
+

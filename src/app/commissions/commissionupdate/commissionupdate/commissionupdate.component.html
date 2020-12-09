@@ -1,0 +1,42 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Update Commission</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+    <hr>
+    <a href="http://localhost:8080/MaintainCommission.html">Additional Help</a><br>
+    <br>
+    <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+        <input type="hidden" name="COMMISSION_ID" #COMMISSION_ID="ngModel"  [(ngModel)]="service.formData.COMMISSION_ID">
+    
+        <div class="form-group">
+            <label>Commission Percentage</label>
+            <input placeholder="Commission Percentage"
+                name="COMMISSION_PERCENTAGE" 
+                #COMMISSION_PERCENTAGE="ngModel" 
+                [(ngModel)]="service.formData.COMMISSION_PERCENTAGE" 
+                class="form-control" 
+                required
+                value="{{COMMISSION_PERCENTAGE}}"
+                type=number step=0.01
+                min="0"
+                oninput="validity.valid||(value='');">
+            <div class="validation-error" *ngIf="COMMISSION_PERCENTAGE.invalid && COMMISSION_PERCENTAGE.touched">
+                This field is required.</div>
+        </div>
+        <div class="form-group">
+            <label for="COMMISSION_DATE">Commision Date</label>
+            <input type="datetime-local"
+                id="COMMISSION_DATE" 
+                name="COMMISSION_DATE" #COMMISSION_DATE="ngModel" 
+                [(ngModel)]="service.formData.COMMISSION_DATE" 
+                class="form-control" required>
+            <div class="validation-error" *ngIf="COMMISSION_DATE.invalid && COMMISSION_DATE.touched">
+                This field is required.</div>
+        </div>
+        <div class="w3-show-inline-block" >
+            <button type="submit" [disabled]="form.invalid" class="btn btn-xs ">Save</button>
+            <a routerLink="/commission-list">
+            <button class="btn btn-xs btn-danger ml-1"  >Return</button>
+            </a>
+        </div>
+    </form>
+    </div>

@@ -1,0 +1,39 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Update Employee Type</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+    <hr>
+    <br>
+    <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    
+        <input type="hidden" name="EMPLOYEE_TYPE_ID" #EMPLOYEE_TYPE_ID="ngModel" 
+            [(ngModel)]="service.formData.EMPLOYEE_TYPE_ID">
+    
+        <div class="form-group">
+            <label>Employee Type Name</label>
+            <input name="EMPLOYEE_TYPE_NAME" #EMPLOYEE_TYPE_NAME="ngModel" 
+                [(ngModel)]="service.formData.EMPLOYEE_TYPE_NAME" 
+                class="form-control" 
+                required
+                pattern="[a-zA-Z\s]+"
+                maxlength="10"
+                minlength="2">
+                <div class="validation-error" *ngIf="EMPLOYEE_TYPE_NAME.invalid && EMPLOYEE_TYPE_NAME.touched">
+                    <div  *ngIf="EMPLOYEE_TYPE_NAME.errors.required">
+                        This field is required.</div>
+                    <div  *ngIf="EMPLOYEE_TYPE_NAME.errors.pattern ">
+                        Employee Type Name can contain no numbers!</div>
+                    <div *ngIf="EMPLOYEE_TYPE_NAME.errors.minlength ">
+                        Employee Type Name should be atleast 2 characters.</div>
+                    <div *ngIf="EMPLOYEE_TYPE_NAME.errors.maxlength ">
+                        Employee Type Name cannot be more than 10 characters.</div>
+                </div>       
+        </div>
+    
+        <div class="w3-show-inline-block" >
+            <button type="submit" [disabled]="form.invalid" class="btn btn-xs btn-info">Save</button>
+            <a routerLink="/employee-type-list">
+            <button  class="btn btn-xs btn-danger ml-1"  > Return </button>
+                </a>
+        </div>
+    </form>
+    </div>

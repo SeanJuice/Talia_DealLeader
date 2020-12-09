@@ -1,0 +1,75 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center">Lead Details Report</h1>
+  <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+<hr>
+  <div class="alert alert-secondary" role="alert">
+    This report will contain information about existing leads during the selected time period.
+  </div>
+  <br>
+  <br>    
+  <form >
+    <div class="form-group">
+      <label for="OptionSelect">Please choose a status option:</label>
+    <select class="form-control" id="OptionSelect" #optName name="Option" [(ngModel)]="selectedOption">
+      <option *ngFor="let option of leadStatusDetails | async" value="{{option.LEAD_STATUS_ID}}" >{{option.LEAD_STATUS_NAME}}</option>
+    </select>
+    </div>
+    </form>
+    <br>
+    <br>
+    <div class="alert alert-danger" data-dismiss="alert" role="alert" *ngIf="showErrorMessage" [dismissible]="dismissible">
+      Please select a lead status   
+    </div>
+    <button  class=" btn-sm btn-secondary text-white "  (click)="GenerateReport(selectedOption)">Generate Report</button>
+    <button  class="btn-sm btn-info text-white ml-1" (click)="DownloadPDF()">Download as PDF</button>
+        <div id="ChartDiv" id="contentToConvert" >
+          <canvas id="canvas"></canvas>
+          <h1 class="display-4 text-center">Lead Details Report</h1> 
+            <div *ngFor="let item of TableData;let i = index">
+              <div class="row">
+                <caption><strong>{{item.LEAD_STATUS_NAME}}</strong></caption>
+              </div>      
+              <table class=" table-latitude" id="testing{{i}}" style="width:100%; padding:10px;" >  
+                <thead class="thead-light">
+                <tr>
+                  <th>Lead Number</th>
+                  <th>Agent Name</th>
+                  <th>Agent Surname</th>
+                  <th>Quantity of Products</th>
+                  <th>Product Name</th>
+                  <th>Product Category</th>
+                  <th>Product Type</th>
+                  <th>Year of Make</th>  
+                </tr>
+                </thead>
+              <tbody>
+                <tr *ngFor="let lead of item.Leads">
+                  <td>{{lead.lead}}</td>
+                  <td>{{lead.name}}</td>
+                  <td>{{lead.surname}}</td>
+                  <td>{{lead.quantity}}</td>
+                  <td>{{lead.product}}</td>
+                  <td>{{lead.category}}</td>
+                  <td>{{lead.type}}</td>
+                  <td>{{lead.year}}</td>
+                </tr>
+              </tbody>
+              <div *ngIf="TableData" id="controlBreak">
+                <div *ngIf="selectedOption && item.LEAD_STATUS_NAME==='Submitted'">Total Leads only submitted : {{totalCount}}</div>
+                <div *ngIf="selectedOption && item.LEAD_STATUS_NAME==='RFQ Sent'">Total Leads with RFQ submitted : {{totalCount}}</div>
+                <div *ngIf="selectedOption && item.LEAD_STATUS_NAME==='Quote Captured'">Total Leads with Quote Captured : {{totalCount}}</div>
+                <div *ngIf="selectedOption && item.LEAD_STATUS_NAME==='Quote Accepted'">Total Leads with Quote Accepted : {{totalCount}}</div>
+                <div *ngIf="selectedOption && item.LEAD_STATUS_NAME==='Quote Declined'">Total Leads with Quote Declined : {{totalCount}}</div>
+                <div *ngIf="selectedOption && item.LEAD_STATUS_NAME==='Meeting Booked'">Total Leads with meeting booked : {{totalCount}}</div>
+                <div *ngIf="selectedOption && item.LEAD_STATUS_NAME==='Inspection'">Total Leads Inspected : {{totalCount}}</div>
+                <div *ngIf="selectedOption && item.LEAD_STATUS_NAME==='Finalized'">Total Finalized Leads : {{totalCount}}</div>
+                <div *ngIf="selectedOption && item.LEAD_STATUS_NAME==='Cancelled'">Total Leads Cancelled : {{totalCount}}</div>
+              </div>
+              <br>
+              </table>
+        </div> 
+        <br>
+  </div>
+</div>
+
+

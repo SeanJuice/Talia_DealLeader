@@ -1,0 +1,93 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Lead Details</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+    <br>
+    <hr> 
+    <a href="http://localhost:8080/LeadDetails.html">Additional Help</a><br>
+    <br>
+    <div class="row">
+    <div class="form-group col-md-6" *ngFor="let at of leadDetails | async">
+            <div class="row">
+                <p>Lead ID:  </p> 
+                <a class="ml-3">{{at.LEAD_ID}}</a>
+            </div>
+            <div class="row">
+                <p>Country:  </p> 
+                <a class="ml-3">{{at.COUNTRY_NAME}}</a>
+            </div>
+            <div class="row">
+                <p>Budget Approved:  </p> 
+                <a class="ml-3">{{at.BUDGET_APPROVED}}</a>
+            </div>
+            <div class="row">
+                <p>Lead Time:  </p> 
+                <a class="ml-3">{{at.LEAD_TIME}}</a>
+            </div>
+            <div class="row">
+                <p>Inspection:  </p> 
+                <a class="ml-3">{{at.INSPECTION}}</a>
+            </div>
+            <div class="row">
+                <p>Lead Status:  </p> 
+                <a class="ml-3">{{at.LEAD_STATUS_NAME}}</a>
+            </div>
+    </div>
+    <div class="form-group col-md-6">
+        <div style="font-size: 30px;">
+            <i class="fas fa-tasks fa-4x"></i>
+        </div>
+    </div>
+</div>
+            <h1 class="display-4 text-center">Product Submitted</h1>
+            <table class="table">
+                <thead class="thead-light">
+                    <th>Product Name</th>
+                    <th>Year of Make</th>
+                    <th>Condition</th>
+                    <th>Quantity</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let at of leadDetails | async">
+                        <td>{{at.PRRODUCT_NAME}}</td>
+                        <td>{{at.YEA_OF_MAKE}}</td>
+                        <td>{{at.CONDITION_NAME}}</td>
+                        <td>{{at.QUANTITY}}</td>
+                        <td>
+                           
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div >
+            <a  *ngFor="let at of leadDetails | async" routerLink="/rfq/{{at.PRODUCT_ID}}"> 
+            <button class="btn btn-sm btn-danger text-white" [disabled]="at.LEAD_STATUS_NAME === 'RFQ Sent' || at.LEAD_STATUS_NAME === 'Quote Captured' || at.LEAD_STATUS_NAME === 'Quote Declined' || at.LEAD_STATUS_NAME === 'Quote Accepted' || at.LEAD_STATUS_NAME === 'Cancelled'  || at.LEAD_STATUS_NAME === 'Finalized' || at.LEAD_STATUS_NAME === 'Meeting Accepted' || at.LEAD_STATUS_NAME === 'Meeting Booked'"  
+            (click)=populateForm(at)><i class="fa fa-file-alt"></i> Send Reqest for Quote</button></a>
+            <a *ngFor="let at of leadDetails | async" routerLink='/quote' >
+            <button class="btn btn-sm btn-info text-white ml-1" [disabled]="at.LEAD_STATUS_NAME === 'Quote Captured' || at.LEAD_STATUS_NAME === 'Quote Declined' || at.LEAD_STATUS_NAME === 'Quote Accepted' || at.LEAD_STATUS_NAME === 'Cancelled'  || at.LEAD_STATUS_NAME === 'Finalized' || at.LEAD_STATUS_NAME === 'Submitted' || at.LEAD_STATUS_NAME === 'Meeting Accepted' || at.LEAD_STATUS_NAME === 'Meeting Booked'"><i class="fa fa-file-alt"></i> Submit Quotes</button></a>
+            <a *ngFor="let at of leadDetails | async" routerLink="/calender/{{at.LEAD_ID}}">
+                <button class="btn btn-sm btn-warning text-white ml-1" [disabled]=" at.LEAD_STATUS_NAME === 'Cancelled'  || at.LEAD_STATUS_NAME === 'Finalized' || at.LEAD_STATUS_NAME === 'Submitted' || at.LEAD_STATUS_NAME === 'Meeting Accepted' || at.LEAD_STATUS_NAME === 'Quote Captured' || at.LEAD_STATUS_NAME === 'Meeting Booked'"><i class="fa fa-file-alt"
+                    ></i> Book Meeting</button></a>
+            <a *ngFor="let at of leadDetails | async" routerLink="/finalize">
+            <button class="btn btn-sm btn-success text-white ml-1" [disabled]=" at.LEAD_STATUS_NAME === 'Quote Captured'  ||at.LEAD_STATUS_NAME === 'Quote Declined' || at.LEAD_STATUS_NAME === 'Quote Accepted' || at.LEAD_STATUS_NAME === 'Cancelled'  || at.LEAD_STATUS_NAME === 'Finalized' || at.LEAD_STATUS_NAME === 'Submitted' || at.LEAD_STATUS_NAME === 'Meeting Booked'" ><i class="fa fa-file-alt"></i> Finalize Lead</button></a>
+            <a *ngFor="let at of leadDetails | async" routerLink="/calender/{{at.LEAD_ID}}">
+                <button class="btn btn-sm btn-secondary text-white ml-1"><i class="fa fa-file-alt"
+                    ></i> View Schedule</button></a>
+        </div>
+        <br>
+        <hr>
+        <div >
+          <a routerLink="/leads">
+          <a class="btn btn-sm btn-secondary text-white ml-1"><i class="fas fa-undo-alt"></i> Return to leads</a></a>
+      </div>
+        </div>
+
+
+        
+
+
+

@@ -1,0 +1,118 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Add Lead</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+   <hr> 
+   <p class="text-center">Please check and complete all the information in the first selction. When complete click the add product button to add 
+       your desired product to the lead.
+   </p>
+   <hr>
+<form #form="ngForm" autocomplete="off" *ngIf="service.formData" (submit)="onSubmit(form)">
+    <input type="hidden" name="LEAD_ID" #LEAD_ID="ngModel" [(ngModel)]="service.formData.LEAD_ID">  
+    <input type="hidden" name="LEAD_STATUS_ID" #LEAD_STATUS_ID="ngModel" [(ngModel)]="service.formData.LEAD_STATUS_ID">    
+    <input type="hidden" name="AGENT_ID" #AGENT_ID="ngModel" [(ngModel)]="service.formData.AGENT_ID">
+    <input type="hidden" name="EMPLOYEE_ID" #EMPLOYEE_ID="ngModel" [(ngModel)]="service.formData.EMPLOYEE_ID">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Country</label><label style="color: red;">  *</label>
+            <select  class="form-control selectwidth" name="COUNTRY_ID" #COUNTRY_ID="ngModel" [(ngModel)]="service.formData.COUNTRY_ID" required>
+                <option value="null">- Select Country -</option>
+                <option *ngFor="let country of countryList" value="{{country.COUNTRY_ID}}">{{country.COUNTRY_NAME}}</option>
+            </select>
+            <div class="help-block" *ngIf="COUNTRY_ID.touched && COUNTRY_ID.invalid" style="color: red; font-size: 80%;">Country is Required!</div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group" [class.has-error]="BUDGET_APPROVED.touched && BUDGET_APPROVED.invalid">
+                <label class="control-label">Budget Approved</label><label style="color: red;">  *</label>
+                <div class="form-control">
+                    <label class="radio-inline">
+                        <input 
+                        type="radio" 
+                        required 
+                        value="Yes"
+                         name="BUDGET_APPROVED " 
+                         #BUDGET_APPROVED ="ngModel" 
+                         [(ngModel)]="service.formData.BUDGET_APPROVED">
+                         Yes</label>
+                    <label class="radio-inline ml-3">
+                        <input 
+                        type="radio" 
+                        required 
+                        value="No" 
+                        name="BUDGET_APPROVED " 
+                        #BUDGET_APPROVED ="ngModel" 
+                        [(ngModel)]="service.formData.BUDGET_APPROVED"
+                        >No</label>
+                </div>
+                <div class="help-block" *ngIf="BUDGET_APPROVED.touched && BUDGET_APPROVED.invalid" style="color: red; font-size: 80%;">Budget Approved is Required!</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+            <div class="form-group col-md-6">
+                <label>Contract Time</label><label style="color: red;">  *</label>
+                <select  class="form-control selectwidth" required name="CONTRACT_TIME" #CONTRACT_TIME="ngModel" [(ngModel)]="service.formData.CONTRACT_TIME">
+                    <option value="">- Select Contract Time -</option>
+                    <option value="6 Months">6 Months</option>
+                    <option value="12 Months">12 Months</option>
+                    <option value="18 Months">18 Months</option>
+                    <option value="24 Months">24 Months</option>
+                    <option value="30 Months">30 Months</option>
+                    <option value="36 Months">36 Months</option>
+                </select>
+                <div class="help-block" *ngIf="CONTRACT_TIME.touched && CONTRACT_TIME.invalid" style="color: red; font-size: 80%;">Contract Time is Required!</div>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Lead Time</label><label style="color: red;">  *</label>
+                <select  class="form-control selectwidth" required name="LEAD_TIME" #LEAD_TIME="ngModel" [(ngModel)]="service.formData.LEAD_TIME">
+                    <option value="">- Select Lead Time -</option>
+                    <option value="6 Months">6 Months</option>
+                    <option value="12 Months">12 Months</option>
+                    <option value="18 Months">18 Months</option>
+                    <option value="24 Months">24 Months</option>
+                    <option value="30 Months">30 Months</option>
+                    <option value="36 Months">36 Months</option>
+                </select>
+                <div class="help-block" *ngIf="LEAD_TIME.touched && LEAD_TIME.invalid" style="color: red; font-size: 80%;">Lead Time is Required!</div>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 form-group" [class.has-error]="INSPECTION.touched && INSPECTION.invalid">
+            <label>Inspection</label><label style="color: red;">  *</label>
+            <div class="form-control">
+                <label class="radio-inline"><input type="radio" value="Yes" name="INSPECTION" #INSPECTION="ngModel" [(ngModel)]="service.formData.INSPECTION" required>Yes</label>
+                <label class="radio-inline ml-3"><input type="radio" value="No" name="INSPECTION" #INSPECTION="ngModel" [(ngModel)]="service.formData.INSPECTION" required>No</label>
+            </div>
+            <div class="help-block" *ngIf="INSPECTION.touched && INSPECTION.invalid" style="color: red; font-size: 80%;">Inspection is Required!</div>
+        </div>
+    </div>
+    <table class="table table-borderless">
+        <thead class="thead-light">
+            <th>Product Name</th>
+            <th>Condition</th>
+            <th>Quantity</th>
+            <th>
+                <a class="btn btn-sm btn-success text-white" (click)="AddOrEditLeadItem(null, service.formData.LEAD_ID)" [ngClass]="{'disabled' : service.leadItems.length>0}"><i class="fa fa-plus"> Add Product</i></a>
+                <!-- <button class="btn btn-sm btn-success text-white" id="add" (click)="AddLeadItem(service.formData.LEAD_ID)" [disabled]="service.leadItems.length>0"><i class="fa fa-plus"> Add Product</i></button> -->
+            </th>
+        </thead>
+        <tbody>
+            <tr *ngIf="service.leadItems.length==0">
+                <td class="font-italic text-center" colspan="4">
+                    No product details added for this lead.
+                </td>
+            </tr>
+            <tr *ngFor="let item of service.leadItems; let i=index;">
+                <td>{{item.PRODUCT_NAME}}</td>
+                <td>{{item.CONDITION_NAME}}</td>
+                <td>{{item.QUANTITY}}</td>
+                <td>
+                    <a class="btn btn-sm btn-info text-white" (click)="AddOrEditLeadItem(i, service.formData.LEAD_ID)"><i class="fa fa-edit"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="form-group">
+        <button type="submit" class=" btn-sm btn-info text-white btn-block " [disabled]="!form.valid" ><i class="fa fa-check-circle"></i> Submit Lead</button>
+    </div>
+</form>
+</div>

@@ -1,0 +1,115 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Add Supplier</h1>
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+
+    <div class="form-group" [class.has-error]="PRODUCT_ID.touched && PRODUCT_ID.invalid">
+        <label>Product Name</label><label style="color: red;">  *</label>
+        <select name="PRODUCT_ID" #PRODUCT_ID="ngModel" [(ngModel)]="service.formData.PRODUCT_ID" class="form-control selectwidth" required>
+            <option value="null">- Select Product -</option>
+            <option *ngFor="let item of products" value="{{item.PRODUCT_ID}}">{{item.PRODUCT_NAME}}</option>
+        </select>
+        <div class="help-block" *ngIf="PRODUCT_ID.touched && PRODUCT_ID.invalid" style="color: red; font-size: 80%;">Product is Required!</div>
+    </div>
+    <div class="form-group" [class.has-error]="COUNTRY_ID.touched && COUNTRY_ID.invalid">
+        <label>Country</label><label style="color: red;">  *</label>
+        <select name="COUNTRY_ID" #COUNTRY_ID="ngModel" [(ngModel)]="service.formData.COUNTRY_ID" class="form-control selectwidth" required>
+            <option value="null">- Select Country -</option>
+            <option *ngFor="let country of countryList" value="{{country.COUNTRY_ID}}">{{country.COUNTRY_NAME}}</option>
+        </select>
+        <div class="help-block" *ngIf="COUNTRY_ID.touched && COUNTRY_ID.invalid" style="color: red; font-size: 80%;">Country is Required!</div>
+    </div>  
+
+    <div class="form-group">
+        <label>Supplier Name</label>
+        <input name="SUPPLIER_NAME" 
+        #SUPPLIER_NAME="ngModel" 
+        [(ngModel)]="service.formData.SUPPLIER_NAME" 
+        class="form-control " 
+        required 
+
+        maxlength="50" 
+        minlength="2"
+        placeholder="Supplier Name">
+        <!-- validation -->
+        <div class="validation-error" *ngIf="SUPPLIER_NAME.invalid && SUPPLIER_NAME.touched">
+            <div *ngIf="SUPPLIER_NAME.errors.required">
+                This field is required </div>
+                <!-- <div *ngIf="SUPPLIER_NAME.errors.pattern">
+                    Name can contain no numbers!</div> -->
+                <div *ngIf="SUPPLIER_NAME.errors.minlength">
+                    Name should be atleast 2 characters</div>
+                    <div *ngIf="SUPPLIER_NAME.errors.maxlength">
+                        Name cannot contain more than 50 characters</div>
+                    
+        </div>
+    </div>
+
+    
+    <div class="form-group">
+        <label>Supplier Physical Address</label>
+        <input name="SUPPLIER_PHYSICAL_ADDRESS" 
+        #SUPPLIER_PHYSICAL_ADDRESS="ngModel" 
+        [(ngModel)]="service.formData.SUPPLIER_PHYSICAL_ADDRESS" 
+        class="form-control" 
+        required 
+        maxlength="50" 
+        minlength="2"
+        placeholder="Supplier Physical Address">
+        <!-- validation -->
+        <div class="validation-error" *ngIf="SUPPLIER_PHYSICAL_ADDRESS.invalid && SUPPLIER_PHYSICAL_ADDRESS.touched">
+            <div *ngIf="SUPPLIER_PHYSICAL_ADDRESS.errors.required">
+                This field is required </div>
+              <div *ngIf="SUPPLIER_PHYSICAL_ADDRESS.errors.minlength">
+                    Physcal Address should be atleast 2 characters</div>
+                    <div *ngIf="SUPPLIER_PHYSICAL_ADDRESS.errors.maxlength">
+                        Physical Address cannot contain more than 50 characters</div>
+        </div>
+    </div>
+
+    <div class="form-group  ">
+        <label>Contact No.</label><label style="color: red;">  *</label>
+        <input
+        placeholder="Contact No."
+        name="SUPPLIER_CONTACT_NO" 
+        #SUPPLIER_CONTACT_NO="ngModel" 
+        [(ngModel)]="service.formData.SUPPLIER_CONTACT_NO" 
+        class="form-control" 
+        required
+        minlength="10"
+        maxlength="14"
+        pattern="[0-9]*">
+        <div class="validation-error" *ngIf="SUPPLIER_CONTACT_NO.invalid && SUPPLIER_CONTACT_NO.touched">
+            <div *ngIf="SUPPLIER_CONTACT_NO.errors.required">This field is required.</div>
+            <div *ngIf="SUPPLIER_CONTACT_NO.errors.minlength">Contact number must be atleast 10 characters.</div>
+            <div *ngIf="SUPPLIER_CONTACT_NO.errors.pattern">Contact number can only contain numbers.</div>
+        </div>
+    </div>  
+
+    <div class="form-group">
+        <label>Supplier Email Address</label><label style="color: red;">  *</label>
+        <input 
+        placeholder="Email-Address" 
+        name="SUPPLIER_EMAIL_ADDRESS" 
+        #SUPPLIER_EMAIL_ADDRESS="ngModel" 
+        [(ngModel)]="service.formData.SUPPLIER_EMAIL_ADDRESS" 
+        class="form-control" 
+        required 
+        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+        <div class="validation-error" *ngIf="SUPPLIER_EMAIL_ADDRESS.invalid && SUPPLIER_EMAIL_ADDRESS.touched">
+            <div *ngIf="SUPPLIER_EMAIL_ADDRESS.errors.required">This field is required.</div>
+            <div *ngIf="SUPPLIER_EMAIL_ADDRESS.errors.pattern">Email address entered is invalid.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="w3-show-inline-block" >
+            <button type="submit" [disabled]="form.invalid" class="btn btn-xs btn-info">Save</button>
+            <a routerLink="/supplierlist">
+            <button class="btn btn-xs btn-danger ml-1" >Return</button></a>
+        </div>
+    </div>
+</form>
+</div>
+
+
+
+

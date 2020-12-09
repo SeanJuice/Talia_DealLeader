@@ -1,0 +1,12 @@
+{
+    "[json]": {
+
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    },
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
+    "appService.deploySubpath": "dist",
+    "appService.defaultWebAppToDeploy": "/subscriptions/45962c24-4dde-494d-9df2-e6b06531218a/resourceGroups/DealLeaderINF370/providers/Microsoft.Web/sites/DLG"
+}

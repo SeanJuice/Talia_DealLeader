@@ -1,0 +1,43 @@
+
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Add Meeting Type</h1>
+    <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+    <hr>
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+
+    <input type="hidden" name="MEETING_TYPE_ID" #MEETING_TYPE_ID="ngModel" [(ngModel)]="service.formData.MEETING_TYPE_ID">
+
+    <div class="form-group">
+        <label>Meeting Type Name</label>
+        <input placeholder="Enter Meeting Type Name" name="MEETING_TYPE_NAME" #MEETING_TYPE_NAME="ngModel"
+         [(ngModel)]="service.formData.MEETING_TYPE_NAME" 
+        class="form-control"
+         required
+        pattern="[a-zA-Z\s]+"
+        maxlength="50"
+        minlength="2"/>
+        <div class="validation-error" *ngIf="MEETING_TYPE_NAME.invalid &&  MEETING_TYPE_NAME.touched">
+            <div *ngIf="MEETING_TYPE_NAME.errors.required">
+                This field is required. 
+            </div>
+
+            <div *ngIf="MEETING_TYPE_NAME.errors.pattern">
+              Name can contain no numbers!
+            </div>
+
+            <div *ngIf="MEETING_TYPE_NAME.errors.minlength">
+               Meeting Name should be at least 2 characters.
+            </div>
+
+        </div>
+       
+    </div>
+  
+    <div class="w3-show-inline-block" >
+        <button type="submit" [disabled]="form.invalid" class="btn btn-xs btn-info ">Save</button>
+        <a routerLink="/meetingtypelist">
+        <button class="btn btn-xs btn-danger ml-1 " >Return</button></a>
+    </div>
+</form>
+</div>
+

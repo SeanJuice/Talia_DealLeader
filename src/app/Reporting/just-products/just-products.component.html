@@ -1,0 +1,63 @@
+<hr>
+<div class="jumbotron">
+<h1 class="display-4 text-center">Product Report</h1>
+<a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+<hr>
+<div class="alert alert-secondary" role="alert">
+  This report will contain information about all products that exist in the system.
+</div>
+
+<br>
+<br>
+  
+
+
+<button  class=" btn-sm btn-secondary text-white " (click)="GenerateReport()">Generate Report</button>
+<button  class="btn-sm btn-info text-white ml-1" (click)="DownloadPDF()">Download as PDF</button>
+ 
+<div id="ChartDiv" >
+  <canvas id="canvas"></canvas>
+  <h1 class="display-4 text-center">Products Report</h1> 
+<br>
+
+
+<table class="table" id="jsPdfTable" id="contentToConvert"> 
+<div *ngFor="let item of TableData; let i = index" >
+  <div class="row">
+    <caption style="font-size: 20px;"><strong>{{item.PRODUCT_CATEGORY_NAME}}</strong></caption>
+  </div>
+
+<table class=" table-latitude" id="testing{{i}}" style="width: 100%;">
+<thead>
+<tr>
+  <th>Product Name</th>
+  <th>Product Type</th>
+  <th>Product Description</th>
+  <th>Year of make</th>
+  
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let products of item.Products">
+  <td>{{products.product}}</td>
+  <td>{{products.type}}</td>
+  <td>{{products.description}}</td>
+  <td>{{products.year}}</td>
+  
+</tr>
+</tbody>
+<br>
+<div *ngIf="TableData" id="controlBreak" >
+  <div *ngIf="item.PRODUCT_CATEGORY_NAME==='Land'">Total Land Products: {{item.Count}}</div>
+  <div *ngIf="item.PRODUCT_CATEGORY_NAME==='Air'">Total Air Products: {{item.Count}}</div>
+  <div *ngIf="item.PRODUCT_CATEGORY_NAME==='Sea'">Total Sea Products: {{item.Count}}</div>
+  <div *ngIf="item.PRODUCT_CATEGORY_NAME==='Cyber'">Total Cyber Products : {{item.Count}}</div>
+
+</div>
+<br>
+<br>
+</table>
+<br>
+<br>
+</div>
+</table>

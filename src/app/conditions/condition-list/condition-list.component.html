@@ -1,0 +1,33 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center">Conditions</h1>
+  <a class="btn btn-sm btn-info text-white" (click)="openInfo()"><i class="fas fa-info-circle"></i> Click me for help</a>
+  <hr>
+  <br>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder= "Search" aria-label="Search Agent" aria-label="SearchAgent"  [(ngModel)]="SearchCondition" autocomplete="off">
+  </div>
+    <br>
+    <a routerLink="/coundition">
+      <button class="btn btn-xs btn-outline-success ml-2" ><i class="far fa-plus-square"></i> Add Condition</button> 
+      </a>
+      <br>
+      <br>
+    <table class="table table-hover" id="myTable">
+    <tr class="trhead">
+            <th>Condition Name</th>
+            <th></th>
+        </tr>
+    
+        <tr *ngFor="let at of data | filter:SearchCondition">
+            <td>{{at.CONDITION_NAME}}</td>  
+            <td>    
+            <a routerLink="/counditions/{{at.CONDITION_ID}}">
+              <button class="btn btn-xs btn-outline-info" (click)="populateForm(at)">Update</button> 
+            </a>
+              <button class="btn btn-xs btn-outline-danger ml-1" (click)="onDelete(at.CONDITION_ID)" >Delete</button> 
+          </td>
+            
+        </tr>
+    </table>
+    </div>
+    
